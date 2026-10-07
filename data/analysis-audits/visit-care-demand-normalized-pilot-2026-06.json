@@ -1,14 +1,14 @@
 {
-  "schema_version": "0.1",
+  "schema_version": "0.2",
   "audit_type": "visit_care_demand_normalized_pilot",
   "service": "訪問介護",
   "office_snapshot": "2026-06-30",
   "demand_period": "2026-06",
   "generated_at": "2026-10-07",
   "evidence": {
-    "github_action_run_id": 37638996076,
-    "github_action_run_url": "https://github.com/Josh-Temple/kaigo-data-analysis/actions/runs/37638996076",
-    "tested_commit": "a17e23bfa3804733908cfde295ed1f8d729d97f0",
+    "github_action_run_id": 37640385724,
+    "github_action_run_url": "https://github.com/Josh-Temple/kaigo-data-analysis/actions/runs/37640385724",
+    "tested_commit": "71f561ce5f0785b0ab1fa2a76e921d12d9269f2e",
     "conclusion": "success"
   },
   "source_checks": {
@@ -18,20 +18,26 @@
       "municipality_code_count": 1776
     },
     "demand_insurer_rows": 1574,
-    "matched_insurer_rows": 1531,
-    "blocked_insurer_rows": 43
+    "matched_insurer_rows": 1541,
+    "blocked_insurer_rows": 33,
+    "geography_mode_counts": {
+      "designated_city_plus_wards": 20,
+      "direct_local_government": 1511,
+      "qualified_insurer_membership_aggregate": 10
+    },
+    "qualified_group_insurer_rows": 10
   },
   "population_coverage": {
-    "category1_insured_percent": 95.39239821105848,
-    "age75plus_percent": 95.46104080441772,
-    "category1_certified_percent": 95.73146585335911
+    "category1_insured_percent": 96.28172052032559,
+    "age75plus_percent": 96.31957696573986,
+    "category1_certified_percent": 96.60266693368467
   },
   "metric_distribution": {
     "unit": "listed home-visit-care offices per 10,000 age-75-plus category-1 insured persons",
-    "n": 1531,
-    "p25": 8.175779339350239,
-    "median": 11.941724385001192,
-    "p75": 17.04549577930721
+    "n": 1541,
+    "p25": 8.186655751125665,
+    "median": 11.94600406164138,
+    "p75": 17.024174327545115
   },
   "yokohama": {
     "prefecture": "神奈川県",
@@ -394,15 +400,15 @@
     ]
   },
   "blocked_reason_counts": {
-    "wide_area_union": 25,
+    "wide_area_union": 20,
     "no_exact_current_local_government_match": 5,
-    "administrative_union_or_association": 13
+    "administrative_union_or_association": 8
   },
   "interpretation_limits": [
     "事業所数は掲載数であり、定員・職員数・稼働量・利用可能量・品質を表さない",
     "分母は第1号被保険者の75歳以上人口であり、訪問介護の実利用者数ではない",
     "地域差は観察値であり、不足・過剰を単独で判定しない",
-    "広域連合・行政組合・表記未解決の保険者は除外し、配賦しない",
-    "J-LIS現行地理と2026-06-30時点の完全同一性は別途時点検証が必要"
+    "検証済み広域保険者は構成自治体の事業所掲載数を保険者単位へ合算し、需要分母は市町村へ按分しない",
+    "未解決保険者は除外し、推測補完しない"
   ]
 }
