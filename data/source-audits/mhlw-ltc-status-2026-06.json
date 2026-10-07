@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.1",
+  "audit_type": "mhlw_ltc_status_monthly_source_qualification",
+  "period": "2026-06",
+  "recorded_at": "2026-10-07",
+  "evidence": {
+    "github_action_run_id": 37635357714,
+    "github_action_run_url": "https://github.com/Josh-Temple/kaigo-data-analysis/actions/runs/37635357714",
+    "tested_commit": "523976202e185f8ec3c5ad68d8d47de3440c8ad6",
+    "conclusion": "success"
+  },
+  "landing_page": "https://www.mhlw.go.jp/topics/kaigo/osirase/jigyo/m26/2606.html",
+  "landing_page_sha256": "dd4cc7f08adabc646173a6e582d06c62ee76dec32023ce320e13c8f3c9510f09",
+  "landing_page_encoding": "cp932",
+  "tables": [
+    {
+      "id": "insurer_category1_population",
+      "anchor_text": "第１表 第１号被保険者数",
+      "url": "https://www.mhlw.go.jp/topics/kaigo/osirase/jigyo/m26/xls/2606-h1.xlsx",
+      "bytes": 131275,
+      "sha256": "9cbe17ec16304569321fe9963112593d3ecaaa417072d8271bf3087fb5e858bd",
+      "file_signature": "zip_container_likely_xlsx",
+      "extension": ".xlsx",
+      "sheet_count": 1,
+      "sheets": [
+        {
+          "name": "第１表h",
+          "dimension": "A1:J1582"
+        }
+      ],
+      "extraction_summary": {
+        "insurer_row_count": 1574,
+        "unique_prefecture_insurer_keys": 1574,
+        "duplicate_key_count": 0,
+        "required_numeric_null_row_count": 0,
+        "age_band_sum_mismatch_row_count": 0,
+        "sum_category1_insured": 35874845,
+        "national_row_category1_insured": 35874845,
+        "sum_matches_national_row": true,
+        "sum_age75plus": 21304752,
+        "national_row_age75plus": 21304752,
+        "age75plus_sum_matches_national_row": true,
+        "column_contract": {
+          "A": "prefecture",
+          "B": "insurer_name",
+          "F": "category1_insured_total",
+          "G": "age_65_74",
+          "H": "age_75_84",
+          "I": "age_85_plus"
+        }
+      }
+    },
+    {
+      "id": "insurer_certified_total",
+      "anchor_text": "第２－１表 要介護（要支援）認定者数 男女計",
+      "url": "https://www.mhlw.go.jp/topics/kaigo/osirase/jigyo/m26/xls/2606-h2-1.xlsx",
+      "bytes": 833526,
+      "sha256": "85b182314042f032151cb3535d7f6ecefe979fdd7b778585d3b02b94e32769d4",
+      "file_signature": "zip_container_likely_xlsx",
+      "extension": ".xlsx",
+      "sheet_count": 1,
+      "sheets": [
+        {
+          "name": "第２表h",
+          "dimension": "A1:BW1582"
+        }
+      ],
+      "extraction_summary": {
+        "insurer_row_count": 1574,
+        "unique_prefecture_insurer_keys": 1574,
+        "duplicate_key_count": 0,
+        "category1_certified_over_total_row_count": 0,
+        "sum_total_certified": 7425362,
+        "national_row_total_certified": 7425362,
+        "total_sum_matches_national_row": true,
+        "sum_category1_certified": 7290395,
+        "national_row_category1_certified": 7290395,
+        "category1_sum_matches_national_row": true,
+        "column_contract": {
+          "A": "prefecture",
+          "B": "insurer_name",
+          "J": "all_certified_total",
+          "R": "category1_certified_total"
+        }
+      }
+    }
+  ],
+  "cross_table_validation": {
+    "matched_prefecture_insurer_keys": 1574,
+    "category1_only_key_count": 0,
+    "certified_only_key_count": 0,
+    "key_sets_match": true,
+    "national_category1_certification_rate": 0.20321746337858743,
+    "national_category1_certification_rate_percent": 20.32174633785874,
+    "join_boundary": "prefecture + insurer_name is sufficient only for cross-table validation inside the same monthly report; municipality joins remain blocked until an official insurer-code mapping is acquired"
+  },
+  "qualification_status": "qualified_for_internal_demand_denominator_extraction",
+  "blocked_for_public_municipality_join": [
+    "The monthly workbooks do not expose an official insurer code in the qualified columns.",
+    "Prefecture + insurer_name is used only to validate the two tables within the same monthly report.",
+    "No join to municipality-level office data will be performed by string name alone.",
+    "An official insurer-to-municipality mapping with time validity is required before publication."
+  ],
+  "data_handling": {
+    "raw_xlsx_committed": false,
+    "insurer_level_rows_committed": false,
+    "repository_contains_summary_only": true
+  }
+}
