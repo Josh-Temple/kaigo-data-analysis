@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="2026年6月の公式データを用いた訪問介護の需要正規化pilot分析。">
+  <title>訪問介護 pilot | 介護データ分析</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./">介護データ分析</a>
+    <nav aria-label="主要リンク">
+      <a href="./visit-care.html" aria-current="page">訪問介護 pilot</a>
+      <a href="https://github.com/Josh-Temple/kaigo-data-analysis">GitHub</a>
+      <a href="https://kaigo-rules.vercel.app/databases">介護ルール</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero compact-hero">
+      <p class="eyebrow">VISIT CARE / PILOT OBSERVATION</p>
+      <h1>訪問介護を、<br>人口で割って見る。</h1>
+      <p class="lead">2026年6月の公式データを使い、訪問介護の掲載事業所数を第1号被保険者の75歳以上人口で正規化しました。</p>
+      <p class="status">これは供給不足を判定する指標ではありません。事業所の定員、職員数、稼働量、利用可能量は含まれていません。</p>
+    </section>
+
+    <section aria-labelledby="coverage-title">
+      <div class="section-number">01</div>
+      <div>
+        <h2 id="coverage-title">まず、結合できた範囲。</h2>
+        <dl class="metrics" id="coverage-metrics">
+          <div><dt>保険者</dt><dd>1,531</dd><span>完全一致で結合</span></div>
+          <div><dt>除外</dt><dd>43</dd><span>広域連合・組合・表記未解決</span></div>
+          <div><dt>75歳以上人口</dt><dd>95.46%</dd><span>全国月報人口に対するcoverage</span></div>
+        </dl>
+        <p class="note strong-note">除外した43保険者へ市区町村を推測配賦していません。広域連合等の構成市町村が一次資料で確認できるまで、分析対象外のままにします。</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="yokohama-title">
+      <div class="section-number">02</div>
+      <div>
+        <p class="eyebrow">YOKOHAMA</p>
+        <h2 id="yokohama-title">横浜市では、75歳以上1万人あたり14.90事業所。</h2>
+        <dl class="metrics" id="yokohama-metrics">
+          <div><dt>75歳以上</dt><dd>568,509</dd><span>第1号被保険者</span></div>
+          <div><dt>認定者</dt><dd>199,792</dd><span>第1号被保険者</span></div>
+          <div><dt>訪問介護</dt><dd>847</dd><span>掲載事業所</span></div>
+          <div><dt>人口1万人あたり</dt><dd>14.90</dd><span>75歳以上を分母</span></div>
+        </dl>
+        <p>安全に結合できた1,531保険者の中央値は <strong>11.94</strong> です。横浜市の値はそれを上回りますが、この差から供給の充足・不足は判断できません。</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="cities-title">
+      <div class="section-number">03</div>
+      <div>
+        <h2 id="cities-title">政令指定都市を同じ尺度で比較する。</h2>
+        <p class="table-intro">事業所の所在地は行政区単位で公開されるため、J-LISの団体コードを使って政令市の各区を市単位へ集約しています。</p>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>都市</th>
+                <th>75歳以上</th>
+                <th>掲載事業所</th>
+                <th>1万人あたり</th>
+              </tr>
+            </thead>
+            <tbody id="city-table-body"></tbody>
+          </table>
+        </div>
+        <p class="note">並び順は「75歳以上1万人あたり掲載事業所数」の降順です。順位そのものを評価には使いません。</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="meaning-title">
+      <div class="section-number">04</div>
+      <div>
+        <h2 id="meaning-title">この数字から分かること、分からないこと。</h2>
+        <div class="boundary-grid">
+          <div>
+            <h3>観察できる</h3>
+            <p>同じ時点・同じサービスについて、人口規模をそろえた掲載事業所数の地域差。</p>
+          </div>
+          <div>
+            <h3>まだ分からない</h3>
+            <p>職員数、訪問可能件数、営業時間、利用者数、移動距離、空き状況を含めた実際の供給能力。</p>
+          </div>
+        </div>
+        <p class="large-copy secondary-copy">次は「事業所数」から「提供できる量」へ近づけます。</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="sources-title">
+      <div class="section-number">05</div>
+      <div>
+        <h2 id="sources-title">出典と再現性</h2>
+        <div class="source-row"><span>厚生労働省</span><strong><a href="https://www.mhlw.go.jp/stf/kaigo-kouhyou_opendata.html">介護サービス情報公表システム</a></strong><em>2026-06-30</em></div>
+        <div class="source-row"><span>厚生労働省</span><strong><a href="https://www.mhlw.go.jp/topics/kaigo/osirase/jigyo/m26/2606.html">介護保険事業状況報告</a></strong><em>2026-06</em></div>
+        <div class="source-row"><span>J-LIS</span><strong><a href="https://www.j-lis.go.jp/spd/code-address/jititai-code.html">地方公共団体コード住所</a></strong><em>地理結合</em></div>
+        <p class="note">取得・結合・集計はGitHub Actionsで再実行できます。source hash、coverage、blocked保険者をrepositoryに記録しています。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Observation only / 2026-06</p>
+    <p><a href="./">介護データ分析へ戻る</a></p>
+  </footer>
+
+  <script>
+    const formatInteger = new Intl.NumberFormat("ja-JP");
+
+    fetch("./data/visit-care-pilot.json")
+      .then((response) => {
+        if (!response.ok) throw new Error("pilot data unavailable");
+        return response.json();
+      })
+      .then((data) => {
+        const tbody = document.getElementById("city-table-body");
+        for (const city of data.designated_cities) {
+          const row = document.createElement("tr");
+          if (city.insurer_name === "横浜市") row.className = "highlight-row";
+          row.innerHTML = `
+            <td><strong>${city.insurer_name}</strong><small>${city.prefecture}</small></td>
+            <td>${formatInteger.format(city.age75plus)}</td>
+            <td>${formatInteger.format(city.visit_care_office_count)}</td>
+            <td>${city.offices_per_10k_age75plus.toFixed(2)}</td>
+          `;
+          tbody.appendChild(row);
+        }
+      })
+      .catch(() => {
+        document.getElementById("city-table-body").innerHTML =
+          '<tr><td colspan="4">データを読み込めませんでした。</td></tr>';
+      });
+  </script>
+</body>
+</html>
