@@ -87,6 +87,20 @@ def main() -> None:
             if needle in normalize_text(link["text"])
         ]
         if not matches:
+            diagnostic_links = [
+                {
+                    "text": link["text"],
+                    "href": link["href"],
+                }
+                for link in html.links
+                if ".xls" in link["href"].lower()
+            ]
+            print(json.dumps({
+                "diagnostic": "target anchor not found",
+                "target_id": target["id"],
+                "target_anchor_contains": target["anchor_contains"],
+                "excel_links": diagnostic_links,
+            }, ensure_ascii=False, indent=2))
             raise ValueError(
                 f"target anchor not found: {target['id']} / {target['anchor_contains']}"
             )
