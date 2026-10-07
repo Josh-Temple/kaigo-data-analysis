@@ -1,0 +1,31 @@
+name: Discover MLIT future-population source
+
+on:
+  pull_request:
+    paths:
+      - "config/mlit_future_population_kanagawa.json"
+      - "scripts/probe_mlit_future_population.py"
+      - ".github/workflows/probe-mlit-future-population.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Discover official Kanagawa download
+        run: |
+          python scripts/probe_mlit_future_population.py \
+            --config config/mlit_future_population_kanagawa.json \
+            --output /tmp/mlit-future-population-discovery.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mlit-future-population-discovery
+          path: /tmp/mlit-future-population-discovery.json
+          retention-days: 14
