@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Build a source-qualified pilot metric for home-visit care.
 
-The pilot uses only insurer rows that safely exact-match a J-LIS local
-government. Designated-city offices are aggregated from J-LIS ward children.
-Wide-area unions and all unresolved insurers remain excluded.
+The pilot uses direct exact J-LIS insurer matches plus source-qualified
+group-insurer memberships. Designated-city wards and qualified group members
+are aggregated upward to the insurer geography. Demand is never allocated down
+from a group insurer to member municipalities.
 """
 
 from __future__ import annotations
@@ -98,6 +99,26 @@ def visit_care_counts(raw: bytes) -> tuple[Counter[str], dict]:
     }
 
 
+def direct_office_geography(
+    body: dict,
+    governments: list[dict],
+) -> tuple[list[str], str]:
+    child_wards = [
+        item for item in governments
+        if item["prefecture"] == body["prefecture"]
+        and item["local_government_code"] != body["local_government_code"]
+        and item["name"].startswith(body["name"])
+        and item["name"][len(body["name"]):].endswith("区")
+        and item["name"][len(body["name"]):]
+    ]
+    codes = [body["local_government_code"]]
+    mode = "direct_local_government"
+    if child_wards:
+        codes.extend(item["local_government_code"] for item in child_wards)
+        mode = "designated_city_plus_wards"
+    return codes, mode
+
+
 def percentile(sorted_values: list[float], p: float) -> float | None:
     if not sorted_values:
         return None
@@ -115,12 +136,16 @@ def main() -> None:
     parser.add_argument("--jlis-config", required=True, type=Path)
     parser.add_argument("--ltc-config", required=True, type=Path)
     parser.add_argument("--office-config", required=True, type=Path)
+    parser.add_argument("--membership-config", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
 
     jlis_config = json.loads(args.jlis_config.read_text(encoding="utf-8"))
     ltc_config = json.loads(args.ltc_config.read_text(encoding="utf-8"))
     office_config = json.loads(args.office_config.read_text(encoding="utf-8"))
+    membership_config = json.loads(
+        args.membership_config.read_text(encoding="utf-8")
+    )
 
     pages, _ = crosswalk.discover_prefecture_pages(jlis_config["index_url"])
     governments = []
@@ -135,6 +160,27 @@ def main() -> None:
         government_by_key.setdefault(
             (record["prefecture"], record["name"]), []
         ).append(record)
+
+    membership_by_key: dict[tuple[str, str], dict] = {}
+    for item in membership_config.get("insurers", []):
+        if item.get("status") != "qualified_for_2026_06":
+            continue
+        key = (item["prefecture"], item["insurer_name"])
+        if key in membership_by_key:
+            raise ValueError(f"duplicate qualified membership: {key}")
+        member_bodies = []
+        for member_name in item["members"]:
+            candidates = government_by_key.get((item["prefecture"], member_name), [])
+            if len(candidates) != 1:
+                raise ValueError(
+                    f"qualified membership member must exact-match J-LIS: "
+                    f"{key} -> {member_name!r}; candidates={len(candidates)}"
+                )
+            member_bodies.append(candidates[0])
+        membership_by_key[key] = {
+            **item,
+            "member_bodies": member_bodies,
+        }
 
     ltc_urls = discover_ltc_urls(ltc_config)
     category1_raw = ltc.fetch(ltc_urls["insurer_category1_population"])
@@ -153,7 +199,29 @@ def main() -> None:
     for row in demand:
         key = (row["prefecture"], row["insurer_name"])
         candidates = government_by_key.get(key, [])
-        if len(candidates) != 1:
+        membership = membership_by_key.get(key)
+
+        local_government_code = None
+        membership_source_urls = None
+        member_names = None
+
+        if len(candidates) == 1:
+            body = candidates[0]
+            geography_codes, geography_mode = direct_office_geography(
+                body, governments
+            )
+            local_government_code = body["local_government_code"]
+        elif len(candidates) == 0 and membership is not None:
+            geography_codes = []
+            for body in membership["member_bodies"]:
+                body_codes, _ = direct_office_geography(body, governments)
+                geography_codes.extend(body_codes)
+            if len(geography_codes) != len(set(geography_codes)):
+                raise ValueError(f"duplicate geography code in membership: {key}")
+            geography_mode = "qualified_insurer_membership_aggregate"
+            membership_source_urls = membership["source_urls"]
+            member_names = membership["members"]
+        else:
             blocked.append({
                 **row,
                 "block_reason": (
@@ -164,33 +232,17 @@ def main() -> None:
             })
             continue
 
-        body = candidates[0]
-        child_wards = [
-            item for item in governments
-            if item["prefecture"] == row["prefecture"]
-            and item["local_government_code"] != body["local_government_code"]
-            and item["name"].startswith(body["name"])
-            and item["name"][len(body["name"]):].endswith("区")
-            and item["name"][len(body["name"]):]
-        ]
-
-        geography_codes = [body["local_government_code"]]
-        geography_mode = "direct_local_government"
-        if child_wards:
-            geography_codes.extend(
-                item["local_government_code"] for item in child_wards
-            )
-            geography_mode = "designated_city_plus_wards"
-
         office_count = sum(office_counts.get(code, 0) for code in geography_codes)
         age75plus = row["age75plus"]
         certified = row["category1_certified"]
 
         matched_rows.append({
             **row,
-            "local_government_code": body["local_government_code"],
+            "local_government_code": local_government_code,
             "geography_mode": geography_mode,
             "office_geography_codes": geography_codes,
+            "member_names": member_names,
+            "membership_source_urls": membership_source_urls,
             "visit_care_office_count": office_count,
             "offices_per_10k_age75plus": (
                 office_count / age75plus * 10000 if age75plus else None
@@ -242,11 +294,17 @@ def main() -> None:
     )
 
     large_municipalities = [
-        row for row in matched_rows if row["age75plus"] >= 10000
+        row for row in matched_rows
+        if row["age75plus"] >= 10000
+        and row["geography_mode"] != "qualified_insurer_membership_aggregate"
     ]
     large_sorted = sorted(
         large_municipalities,
         key=lambda item: item["offices_per_10k_age75plus"] or -1,
+    )
+
+    geography_mode_counts = Counter(
+        row["geography_mode"] for row in matched_rows
     )
 
     result = {
@@ -260,6 +318,10 @@ def main() -> None:
             "demand_insurer_rows": len(demand),
             "matched_insurer_rows": len(matched_rows),
             "blocked_insurer_rows": len(blocked),
+            "geography_mode_counts": dict(geography_mode_counts),
+            "qualified_group_insurer_rows": geography_mode_counts.get(
+                "qualified_insurer_membership_aggregate", 0
+            ),
         },
         "population_coverage": {
             "category1_insured_percent": matched_category1 / national_category1 * 100,
@@ -306,7 +368,8 @@ def main() -> None:
             "office count is a listing count, not service capacity, staffing, utilization, quality, or accessible supply",
             "the denominator is category-1 insured population age 75+, not observed home-visit-care users",
             "rankings are exploratory comparisons only and do not establish shortage or oversupply",
-            "wide-area unions and unresolved insurer names are excluded, not imputed",
+            "qualified group insurers aggregate member-municipality office listings upward; group demand is not allocated down to members",
+            "unresolved group insurers and insurer names remain excluded, not imputed",
             "J-LIS geography is current at qualification time; exact 2026-06-30 temporal equivalence remains a separate check",
         ],
     }
