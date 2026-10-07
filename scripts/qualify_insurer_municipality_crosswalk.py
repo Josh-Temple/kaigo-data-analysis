@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Conservatively qualify insurer-to-municipality mappings.
 
-This script joins MHLW insurer rows only when prefecture + insurer name exactly
-matches one current J-LIS local-government body. It intentionally leaves
-wide-area unions and all ambiguous/nonmatching insurers blocked.
+This script qualifies two conservative geography paths:
+1. prefecture + insurer name exactly matches one J-LIS local-government body;
+2. an insurer membership list is supported by period-aligned official sources,
+   and every member name exactly resolves to one J-LIS body.
+
+Group-insurer demand is kept at insurer level; it is never allocated to members.
 """
 
 from __future__ import annotations
@@ -198,11 +201,15 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--jlis-config", required=True, type=Path)
     parser.add_argument("--ltc-config", required=True, type=Path)
+    parser.add_argument("--membership-config", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
 
     jlis_config = json.loads(args.jlis_config.read_text(encoding="utf-8"))
     ltc_config = json.loads(args.ltc_config.read_text(encoding="utf-8"))
+    membership_config = json.loads(
+        args.membership_config.read_text(encoding="utf-8")
+    )
 
     pages, index_meta = discover_prefecture_pages(jlis_config["index_url"])
 
@@ -218,6 +225,34 @@ def main() -> None:
         government_keys.setdefault(
             (record["prefecture"], record["name"]), []
         ).append(record)
+
+    membership_by_key: dict[tuple[str, str], dict] = {}
+    for item in membership_config.get("insurers", []):
+        if item.get("status") != "qualified_for_2026_06":
+            continue
+        key = (item["prefecture"], item["insurer_name"])
+        if key in membership_by_key:
+            raise ValueError(f"duplicate qualified membership: {key}")
+
+        resolved_members = []
+        for member_name in item["members"]:
+            candidates = government_keys.get((item["prefecture"], member_name), [])
+            if len(candidates) != 1:
+                raise ValueError(
+                    f"membership member must resolve exactly once: "
+                    f"{key} -> {member_name!r}; candidates={len(candidates)}"
+                )
+            resolved_members.append(candidates[0])
+
+        member_codes = [row["local_government_code"] for row in resolved_members]
+        if len(member_codes) != len(set(member_codes)):
+            raise ValueError(f"duplicate member code inside membership: {key}")
+
+        membership_by_key[key] = {
+            **item,
+            "resolved_members": resolved_members,
+            "local_government_codes": member_codes,
+        }
 
     workbook_url = discover_mhlw_workbook_url(
         ltc_config, "insurer_category1_population"
@@ -235,21 +270,40 @@ def main() -> None:
             matched.append({
                 **insurer,
                 "local_government_code": body["local_government_code"],
+                "local_government_codes": [body["local_government_code"]],
                 "jlis_source_url": body["source_url"],
                 "match_method": "exact_prefecture_and_name",
             })
-        else:
-            blocked.append({
-                **insurer,
-                "candidate_count": len(candidates),
-                "block_reason": (
-                    "ambiguous_exact_match"
-                    if len(candidates) > 1
-                    else classify_blocked(insurer["insurer_name"])
-                ),
-            })
+            continue
 
-    matched_codes = [row["local_government_code"] for row in matched]
+        membership = membership_by_key.get(key)
+        if membership is not None and len(candidates) == 0:
+            matched.append({
+                **insurer,
+                "local_government_code": None,
+                "local_government_codes": membership["local_government_codes"],
+                "member_names": membership["members"],
+                "membership_source_urls": membership["source_urls"],
+                "membership_temporal_basis": membership["temporal_basis"],
+                "match_method": "qualified_insurer_membership",
+            })
+            continue
+
+        blocked.append({
+            **insurer,
+            "candidate_count": len(candidates),
+            "block_reason": (
+                "ambiguous_exact_match"
+                if len(candidates) > 1
+                else classify_blocked(insurer["insurer_name"])
+            ),
+        })
+
+    matched_codes = [
+        code
+        for row in matched
+        for code in row["local_government_codes"]
+    ]
     duplicate_matched_codes = [
         code for code, count in Counter(matched_codes).items() if count > 1
     ]
@@ -260,6 +314,21 @@ def main() -> None:
         )
 
     blocked_reason_counts = Counter(row["block_reason"] for row in blocked)
+    match_method_counts = Counter(row["match_method"] for row in matched)
+
+    insurer_keys = {
+        (row["prefecture"], row["insurer_name"]) for row in insurers
+    }
+    unused_qualified_memberships = sorted(
+        f"{prefecture} / {insurer_name}"
+        for prefecture, insurer_name in membership_by_key
+        if (prefecture, insurer_name) not in insurer_keys
+    )
+    if unused_qualified_memberships:
+        raise ValueError(
+            "qualified memberships not present in MHLW demand rows: "
+            + ", ".join(unused_qualified_memberships)
+        )
 
     result = {
         "schema_version": "0.1",
@@ -283,15 +352,17 @@ def main() -> None:
             "coverage_percent": (len(matched) / len(insurers) * 100) if insurers else None,
             "duplicate_matched_local_government_code_count": len(duplicate_matched_codes),
             "blocked_reason_counts": dict(blocked_reason_counts),
-            "safe_match_policy": "exact prefecture + insurer name -> exactly one J-LIS local-government body",
-            "temporal_boundary": "J-LIS pages are fetched at qualification time; this probe does not yet prove that every matched local-government identity was unchanged at 2026-06-30.",
+            "match_method_counts": dict(match_method_counts),
+            "qualified_membership_count": len(membership_by_key),
+            "safe_match_policy": "direct exact J-LIS match, or period-aligned official membership whose member names each exact-match J-LIS",
+            "temporal_boundary": "Direct J-LIS matches use current identity at qualification time. Group memberships are used only when their official evidence covers 2026-06.",
         },
         "matched": matched,
         "blocked": blocked,
         "publication_boundary": [
             "matched rows may be used for pilot analysis only after service-office geography compatibility is checked",
             "blocked rows must not receive an inferred municipality code",
-            "wide-area union demand must not be allocated to member municipalities without an official membership/allocation source",
+            "group-insurer demand is never allocated to member municipalities; member office listings are aggregated upward to the insurer geography",
         ],
     }
 
@@ -308,7 +379,12 @@ def main() -> None:
         "blocked_insurers": len(blocked),
         "coverage_percent": result["crosswalk"]["coverage_percent"],
         "blocked_reason_counts": dict(blocked_reason_counts),
+        "match_method_counts": dict(match_method_counts),
         "sample_matched": matched[:10],
+        "qualified_group_matches": [
+            row for row in matched
+            if row["match_method"] == "qualified_insurer_membership"
+        ],
         "blocked": blocked,
     }
     print(json.dumps(log_summary, ensure_ascii=False, indent=2))
