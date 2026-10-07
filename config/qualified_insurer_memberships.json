@@ -40,6 +40,47 @@
       ]
     },
     {
+      "prefecture": "沖縄県",
+      "insurer_name": "沖縄県介護保険広域連合",
+      "members": [
+        "国頭村",
+        "大宜味村",
+        "東村",
+        "今帰仁村",
+        "本部町",
+        "恩納村",
+        "宜野座村",
+        "金武町",
+        "伊江村",
+        "伊平屋村",
+        "伊是名村",
+        "読谷村",
+        "嘉手納町",
+        "北谷町",
+        "北中城村",
+        "中城村",
+        "西原町",
+        "豊見城市",
+        "八重瀬町",
+        "南城市",
+        "与那原町",
+        "久米島町",
+        "南風原町",
+        "渡嘉敷村",
+        "座間味村",
+        "粟国村",
+        "渡名喜村",
+        "南大東村",
+        "北大東村"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）・第9期版公式ガイド",
+      "source_urls": [
+        "https://www.okinawa-kouiki.jp/_files/00171083/09keikaku.pdf",
+        "https://www.okinawa-kouiki.jp/docs/2012110500026/file_contents/gaido.pdf"
+      ]
+    },
+    {
       "prefecture": "岩手県",
       "insurer_name": "一関地区広域行政組合",
       "members": [
@@ -143,6 +184,20 @@
       ]
     },
     {
+      "prefecture": "三重県",
+      "insurer_name": "鈴鹿亀山地区広域連合",
+      "members": [
+        "鈴鹿市",
+        "亀山市"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://www.suzukakameyama-kouiki.jp/insurance/kaigoplan.html",
+        "https://www.suzukakameyama-kouiki.jp/insurance/file_plan7/d9_keikaku_20240401.pdf?20240419000000="
+      ]
+    },
+    {
       "prefecture": "秋田県",
       "insurer_name": "大曲仙北広域市町村圏組合",
       "members": [
@@ -155,6 +210,21 @@
       "source_urls": [
         "https://www.oskaigonet.or.jp/other/keikaku/jigyoplan",
         "https://www.oskaigonet.or.jp/ippan/riyou/pamphlet/hokenryo"
+      ]
+    },
+    {
+      "prefecture": "長崎県",
+      "insurer_name": "島原地域広域市町村圏組合",
+      "members": [
+        "島原市",
+        "雲仙市",
+        "南島原市"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://www.shimabara-area.net/kaigo/kiji003673/index.html",
+        "https://www.shimabara-area.net/kaigo/kiji003682/3_682_shiryou1_5klm45ua.pdf"
       ]
     },
     {
