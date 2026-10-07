@@ -6,6 +6,7 @@ on:
       - "scripts/build_visit_care_pilot.py"
       - ".github/workflows/build-visit-care-pilot.yml"
       - "config/jlis_local_government_codes.json"
+      - "config/qualified_insurer_memberships.json"
       - "config/mhlw_ltc_status_monthly.json"
       - "config/mhlw_visit_care_snapshots.json"
       - "scripts/qualify_insurer_municipality_crosswalk.py"
@@ -30,6 +31,7 @@ jobs:
             --jlis-config config/jlis_local_government_codes.json \
             --ltc-config config/mhlw_ltc_status_monthly.json \
             --office-config config/mhlw_visit_care_snapshots.json \
+            --membership-config config/qualified_insurer_memberships.json \
             --output /tmp/visit-care-pilot.json
       - uses: actions/upload-artifact@v4
         with:
