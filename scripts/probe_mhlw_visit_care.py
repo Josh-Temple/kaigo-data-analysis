@@ -24,7 +24,7 @@ from urllib.request import Request, urlopen
 
 
 OFFICE_ID_CANDIDATES = ("事業所番号", "No")
-MUNICIPALITY_CODE_CANDIDATES = ("都道府県コード又は市区町村コード",)
+MUNICIPALITY_CODE_CANDIDATES = (\n    "都道府県コード又は市町村コード",\n    "都道府県コード又は市区町村コード",\n)
 CITY_CANDIDATES = ("市区町村名",)
 SERVICE_CANDIDATES = ("サービスの種類",)
 
