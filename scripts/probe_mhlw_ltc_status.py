@@ -56,6 +56,15 @@ def fetch(url: str) -> bytes:
         return response.read()
 
 
+def decode_html(raw: bytes) -> tuple[str, str]:
+    for encoding in ("utf-8", "cp932", "shift_jis"):
+        try:
+            return raw.decode(encoding), encoding
+        except UnicodeDecodeError:
+            continue
+    raise UnicodeDecodeError("unknown", b"", 0, 1, "unsupported HTML encoding")
+
+
 def classify_file(raw: bytes) -> str:
     if raw.startswith(b"PK\x03\x04"):
         return "zip_container_likely_xlsx"
@@ -74,7 +83,7 @@ def main() -> None:
 
     config = json.loads(args.config.read_text(encoding="utf-8"))
     page_raw = fetch(config["landing_page"])
-    page_text = page_raw.decode("utf-8", errors="replace")
+    page_text, page_encoding = decode_html(page_raw)
 
     html = LinkParser()
     html.feed(page_text)
@@ -127,6 +136,7 @@ def main() -> None:
         "period": config["period"],
         "landing_page": config["landing_page"],
         "landing_page_sha256": hashlib.sha256(page_raw).hexdigest(),
+        "landing_page_encoding": page_encoding,
         "link_count": len(html.links),
         "tables": qualified,
         "qualification_scope": [
