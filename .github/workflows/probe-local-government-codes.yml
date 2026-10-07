@@ -1,0 +1,31 @@
+name: Probe current local-government codes
+
+on:
+  pull_request:
+    paths:
+      - "config/digital_government_local_governments.json"
+      - "scripts/probe_digital_government_local_governments.py"
+      - ".github/workflows/probe-local-government-codes.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Probe Digital Agency current local-government list
+        run: |
+          python scripts/probe_digital_government_local_governments.py \
+            --config config/digital_government_local_governments.json \
+            --output /tmp/local-government-source-probe.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: local-government-source-probe
+          path: /tmp/local-government-source-probe.json
+          retention-days: 14
