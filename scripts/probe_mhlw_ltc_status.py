@@ -143,6 +143,179 @@ def inspect_xlsx(raw: bytes, max_rows: int = 20) -> dict:
         }
 
 
+def _column_from_cell_ref(ref: str) -> str:
+    match = re.match(r"([A-Z]+)", ref)
+    return match.group(1) if match else ""
+
+
+def first_sheet_rows(raw: bytes) -> list[dict[str, str]]:
+    with zipfile.ZipFile(io.BytesIO(raw)) as zf:
+        main_ns = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+        rel_ns = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+        pkg_rel_ns = "http://schemas.openxmlformats.org/package/2006/relationships"
+        workbook = ET.fromstring(zf.read("xl/workbook.xml"))
+        rels = ET.fromstring(zf.read("xl/_rels/workbook.xml.rels"))
+        rel_map = {
+            rel.attrib["Id"]: rel.attrib["Target"]
+            for rel in rels.findall(f"{{{pkg_rel_ns}}}Relationship")
+        }
+        first_sheet = workbook.find(f".//{{{main_ns}}}sheet")
+        if first_sheet is None:
+            return []
+        rel_id = first_sheet.attrib[f"{{{rel_ns}}}id"]
+        target = rel_map[rel_id].lstrip("/")
+        sheet_path = target if target.startswith("xl/") else f"xl/{target}"
+        root = ET.fromstring(zf.read(sheet_path))
+        shared = _xlsx_shared_strings(zf)
+        rows = []
+        for row in root.findall(f".//{{{main_ns}}}sheetData/{{{main_ns}}}row"):
+            values = {"_row": row.attrib.get("r", "")}
+            for cell in row.findall(f"{{{main_ns}}}c"):
+                ref = cell.attrib.get("r", "")
+                col = _column_from_cell_ref(ref)
+                value = _xlsx_cell_value(cell, shared)
+                if col and value is not None:
+                    values[col] = value
+            rows.append(values)
+        return rows
+
+
+def as_int(value: str | None) -> int | None:
+    if value is None:
+        return None
+    try:
+        return int(float(value.replace(",", "")))
+    except (TypeError, ValueError):
+        return None
+
+
+def summarize_category1_rows(raw: bytes) -> tuple[dict, set[tuple[str, str]]]:
+    rows = first_sheet_rows(raw)
+    national = next((row for row in rows if row.get("A") == "全国計"), None)
+    if national is None:
+        raise ValueError("category-1 workbook has no 全国計 row")
+
+    records = []
+    for row in rows:
+        if not row.get("A") or not row.get("B"):
+            continue
+        total = as_int(row.get("F"))
+        age_65_74 = as_int(row.get("G"))
+        age_75_84 = as_int(row.get("H"))
+        age_85_plus = as_int(row.get("I"))
+        if total is None:
+            continue
+        records.append({
+            "key": (row["A"], row["B"]),
+            "total": total,
+            "age_65_74": age_65_74,
+            "age_75_84": age_75_84,
+            "age_85_plus": age_85_plus,
+        })
+
+    keys = [record["key"] for record in records]
+    duplicate_keys = len(keys) - len(set(keys))
+    required_null_rows = sum(
+        1 for record in records
+        if None in (
+            record["total"],
+            record["age_65_74"],
+            record["age_75_84"],
+            record["age_85_plus"],
+        )
+    )
+    age_band_mismatch_rows = sum(
+        1 for record in records
+        if None not in (
+            record["age_65_74"],
+            record["age_75_84"],
+            record["age_85_plus"],
+        )
+        and record["age_65_74"] + record["age_75_84"] + record["age_85_plus"]
+        != record["total"]
+    )
+    total_sum = sum(record["total"] for record in records)
+    age75plus_sum = sum(
+        (record["age_75_84"] or 0) + (record["age_85_plus"] or 0)
+        for record in records
+    )
+    national_total = as_int(national.get("F"))
+    national_age75plus = (as_int(national.get("H")) or 0) + (as_int(national.get("I")) or 0)
+
+    return ({
+        "insurer_row_count": len(records),
+        "unique_prefecture_insurer_keys": len(set(keys)),
+        "duplicate_key_count": duplicate_keys,
+        "required_numeric_null_row_count": required_null_rows,
+        "age_band_sum_mismatch_row_count": age_band_mismatch_rows,
+        "sum_category1_insured": total_sum,
+        "national_row_category1_insured": national_total,
+        "sum_matches_national_row": total_sum == national_total,
+        "sum_age75plus": age75plus_sum,
+        "national_row_age75plus": national_age75plus,
+        "age75plus_sum_matches_national_row": age75plus_sum == national_age75plus,
+        "column_contract": {
+            "A": "prefecture",
+            "B": "insurer_name",
+            "F": "category1_insured_total",
+            "G": "age_65_74",
+            "H": "age_75_84",
+            "I": "age_85_plus",
+        },
+    }, set(keys))
+
+
+def summarize_certified_rows(raw: bytes) -> tuple[dict, set[tuple[str, str]]]:
+    rows = first_sheet_rows(raw)
+    national = next((row for row in rows if row.get("A") == "全国計"), None)
+    if national is None:
+        raise ValueError("certification workbook has no 全国計 row")
+
+    records = []
+    for row in rows:
+        if not row.get("A") or not row.get("B"):
+            continue
+        total_certified = as_int(row.get("J"))
+        category1_certified = as_int(row.get("R"))
+        if total_certified is None or category1_certified is None:
+            continue
+        records.append({
+            "key": (row["A"], row["B"]),
+            "total_certified": total_certified,
+            "category1_certified": category1_certified,
+        })
+
+    keys = [record["key"] for record in records]
+    duplicate_keys = len(keys) - len(set(keys))
+    first_insured_over_total_rows = sum(
+        1 for record in records
+        if record["category1_certified"] > record["total_certified"]
+    )
+    total_sum = sum(record["total_certified"] for record in records)
+    category1_sum = sum(record["category1_certified"] for record in records)
+    national_total = as_int(national.get("J"))
+    national_category1 = as_int(national.get("R"))
+
+    return ({
+        "insurer_row_count": len(records),
+        "unique_prefecture_insurer_keys": len(set(keys)),
+        "duplicate_key_count": duplicate_keys,
+        "category1_certified_over_total_row_count": first_insured_over_total_rows,
+        "sum_total_certified": total_sum,
+        "national_row_total_certified": national_total,
+        "total_sum_matches_national_row": total_sum == national_total,
+        "sum_category1_certified": category1_sum,
+        "national_row_category1_certified": national_category1,
+        "category1_sum_matches_national_row": category1_sum == national_category1,
+        "column_contract": {
+            "A": "prefecture",
+            "B": "insurer_name",
+            "J": "all_certified_total",
+            "R": "category1_certified_total",
+        },
+    }, set(keys))
+
+
 def classify_file(raw: bytes) -> str:
     if raw.startswith(b"PK\x03\x04"):
         return "zip_container_likely_xlsx"
@@ -167,6 +340,8 @@ def main() -> None:
     html.feed(page_text)
 
     qualified = []
+    extraction_keys: dict[str, set[tuple[str, str]]] = {}
+    extraction_summaries: dict[str, dict] = {}
     for target in config["target_tables"]:
         needle = normalize_text(target["anchor_contains"])
         matches = [
@@ -195,6 +370,16 @@ def main() -> None:
         selected = matches[-1] if target.get("expected_occurrence") == "last" else matches[0]
         file_url = urljoin(config["landing_page"], selected["href"])
         raw = fetch(file_url)
+        if target["id"] == "insurer_category1_population":
+            extraction_summary, keys = summarize_category1_rows(raw)
+            extraction_summaries[target["id"]] = extraction_summary
+            extraction_keys[target["id"]] = keys
+        elif target["id"] == "insurer_certified_total":
+            extraction_summary, keys = summarize_certified_rows(raw)
+            extraction_summaries[target["id"]] = extraction_summary
+            extraction_keys[target["id"]] = keys
+        else:
+            extraction_summary = None
 
         qualified.append({
             "id": target["id"],
@@ -207,7 +392,31 @@ def main() -> None:
             "file_signature": classify_file(raw),
             "extension": Path(file_url.split("?", 1)[0]).suffix.lower(),
             "xlsx_structure": inspect_xlsx(raw) if classify_file(raw) == "zip_container_likely_xlsx" else None,
+            "extraction_summary": extraction_summary,
         })
+
+    category1_keys = extraction_keys.get("insurer_category1_population", set())
+    certified_keys = extraction_keys.get("insurer_certified_total", set())
+    category1_summary = extraction_summaries.get("insurer_category1_population", {})
+    certified_summary = extraction_summaries.get("insurer_certified_total", {})
+    category1_total = category1_summary.get("sum_category1_insured")
+    category1_certified = certified_summary.get("sum_category1_certified")
+    certification_rate = (
+        category1_certified / category1_total
+        if category1_total and category1_certified is not None
+        else None
+    )
+    cross_table = {
+        "matched_prefecture_insurer_keys": len(category1_keys & certified_keys),
+        "category1_only_key_count": len(category1_keys - certified_keys),
+        "certified_only_key_count": len(certified_keys - category1_keys),
+        "key_sets_match": category1_keys == certified_keys,
+        "national_category1_certification_rate": certification_rate,
+        "national_category1_certification_rate_percent": (
+            certification_rate * 100 if certification_rate is not None else None
+        ),
+        "join_boundary": "prefecture + insurer_name is sufficient only for cross-table validation inside the same monthly report; municipality joins remain blocked until an official insurer-code mapping is acquired",
+    }
 
     result = {
         "schema_version": "0.1",
@@ -218,6 +427,7 @@ def main() -> None:
         "landing_page_encoding": page_encoding,
         "link_count": len(html.links),
         "tables": qualified,
+        "cross_table_validation": cross_table,
         "qualification_scope": [
             "official landing page reachable",
             "target insurer-level links discoverable without guessed file URLs",
@@ -225,12 +435,9 @@ def main() -> None:
             "target file hashes and container signatures recorded"
         ],
         "not_yet_qualified": [
-            "spreadsheet sheet names and cell layout",
-            "insurer code field",
-            "row count",
-            "category-1 insured extraction",
-            "certified-person extraction",
-            "municipality-code join"
+            "official insurer code field or mapping",
+            "municipality-code join",
+            "publication-ready insurer-level dataset"
         ]
     }
 
