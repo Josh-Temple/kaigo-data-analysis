@@ -1,61 +1,304 @@
 {
-  "schema_version": "0.1",
+  "schema_version": "0.2",
   "audit_type": "insurer_municipality_crosswalk_qualification",
   "demand_period": "2026-06",
   "qualified_at": "2026-10-07",
   "evidence": {
-    "github_action_run_id": 37638631690,
-    "github_action_run_url": "https://github.com/Josh-Temple/kaigo-data-analysis/actions/runs/37638631690",
-    "tested_commit": "75cd6547406346c41e8131456b29e0893d0b67f1",
+    "github_action_run_id": 37640385703,
+    "github_action_run_url": "https://github.com/Josh-Temple/kaigo-data-analysis/actions/runs/37640385703",
+    "tested_commit": "71f561ce5f0785b0ab1fa2a76e921d12d9269f2e",
     "conclusion": "success"
   },
   "sources": {
     "mhlw": "介護保険事業状況報告 2026-06 保険者別第1表",
-    "jlis": "地方公共団体コード住所 都道府県別ページ"
+    "jlis": "地方公共団体コード住所 都道府県別ページ",
+    "qualified_group_memberships": "config/qualified_insurer_memberships.json"
   },
   "results": {
     "jlis_local_government_records": 1912,
     "mhlw_insurers": 1574,
-    "matched_insurers": 1531,
-    "blocked_insurers": 43,
-    "coverage_percent": 97.26810673443455,
+    "matched_insurers": 1541,
+    "blocked_insurers": 33,
+    "coverage_percent": 97.90343074968234,
     "blocked_reason_counts": {
-      "wide_area_union": 25,
+      "wide_area_union": 20,
       "no_exact_current_local_government_match": 5,
-      "administrative_union_or_association": 13
+      "administrative_union_or_association": 8
+    },
+    "match_method_counts": {
+      "exact_prefecture_and_name": 1531,
+      "qualified_insurer_membership": 10
     }
   },
-  "match_rule": "都道府県 + 保険者名がJ-LISの1団体に完全一致した場合のみ採用",
-  "blocked": [
+  "group_matches": [
     {
       "prefecture": "北海道",
       "insurer_name": "日高中部広域連合",
       "category1_insured_total": 8843,
       "age75plus": 5322,
-      "candidate_count": 0,
-      "block_reason": "wide_area_union"
-    },
-    {
-      "prefecture": "北海道",
-      "insurer_name": "空知中部広域連合",
-      "category1_insured_total": 8431,
-      "age75plus": 5327,
-      "candidate_count": 0,
-      "block_reason": "wide_area_union"
+      "local_government_code": null,
+      "local_government_codes": [
+        "016047",
+        "016101"
+      ],
+      "member_names": [
+        "新冠町",
+        "新ひだか町"
+      ],
+      "membership_source_urls": [
+        "https://www.niikappu.jp/kurashi/kenko/documents/dai9kiniiikapputyoukoureisyahokennhukusikeikaku.pdf",
+        "https://www.harp.lg.jp/opendata/dataset/1727/resource/3998/content.html"
+      ],
+      "membership_temporal_basis": "第9期（2024-2026）と北海道公式オープンデータの現行構成",
+      "match_method": "qualified_insurer_membership"
     },
     {
       "prefecture": "北海道",
       "insurer_name": "後志広域連合",
       "category1_insured_total": 16845,
       "age75plus": 10205,
-      "candidate_count": 0,
-      "block_reason": "wide_area_union"
+      "local_government_code": null,
+      "local_government_codes": [
+        "013919",
+        "013935",
+        "013943",
+        "013951",
+        "013960",
+        "013978",
+        "013986",
+        "013994",
+        "014001",
+        "014010",
+        "014036",
+        "014044",
+        "014052",
+        "014061",
+        "014079",
+        "014095"
+      ],
+      "member_names": [
+        "島牧村",
+        "黒松内町",
+        "蘭越町",
+        "ニセコ町",
+        "真狩村",
+        "留寿都村",
+        "喜茂別町",
+        "京極町",
+        "倶知安町",
+        "共和町",
+        "泊村",
+        "神恵内村",
+        "積丹町",
+        "古平町",
+        "仁木町",
+        "赤井川村"
+      ],
+      "membership_source_urls": [
+        "https://www.shiribeshi-kouiki.jp/file/contents/418/3979/dai9ki_keikakusyo.pdf"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
     },
     {
       "prefecture": "北海道",
       "insurer_name": "大雪地区広域連合",
       "category1_insured_total": 9068,
       "age75plus": 5490,
+      "local_government_code": null,
+      "local_government_codes": [
+        "014583",
+        "014591",
+        "014532"
+      ],
+      "member_names": [
+        "東川町",
+        "美瑛町",
+        "東神楽町"
+      ],
+      "membership_source_urls": [
+        "https://taisetsu-kouiki.jp/",
+        "https://taisetsu-kouiki.jp/2026/06/16/4-3-2-2-2/"
+      ],
+      "membership_temporal_basis": "公式現行構成ページ + 2026年度第9期保険料ページ",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "岩手県",
+      "insurer_name": "二戸地区広域行政事務組合",
+      "category1_insured_total": 19962,
+      "age75plus": 11527,
+      "local_government_code": null,
+      "local_government_codes": [
+        "032131",
+        "035246",
+        "035017",
+        "035068"
+      ],
+      "member_names": [
+        "二戸市",
+        "一戸町",
+        "軽米町",
+        "九戸村"
+      ],
+      "membership_source_urls": [
+        "https://www.cassiopeia.or.jp/wordpress/wp-content/uploads/2012/01/3aa8d56571b90564aa2db69034996d19.pdf"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "岩手県",
+      "insurer_name": "盛岡北部行政事務組合",
+      "category1_insured_total": 17420,
+      "age75plus": 9967,
+      "local_government_code": null,
+      "local_government_codes": [
+        "032140",
+        "033022",
+        "033031"
+      ],
+      "member_names": [
+        "八幡平市",
+        "葛巻町",
+        "岩手町"
+      ],
+      "membership_source_urls": [
+        "https://m-hokubu.or.jp/mhg/wp-content/uploads/2021/05/8243a53a84193650b960f803fef304a4.pdf"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "岩手県",
+      "insurer_name": "久慈広域連合",
+      "category1_insured_total": 20404,
+      "age75plus": 11551,
+      "local_government_code": null,
+      "local_government_codes": [
+        "032077",
+        "035076",
+        "035033",
+        "034851"
+      ],
+      "member_names": [
+        "久慈市",
+        "洋野町",
+        "野田村",
+        "普代村"
+      ],
+      "membership_source_urls": [
+        "https://www.kuji-kouiki.jp/kaigo/%E7%AC%AC%EF%BC%99%E6%9C%9F%E4%BB%8B%E8%AD%B7%E4%BF%9D%E9%99%BA%E4%BA%8B%E6%A5%AD%E8%A8%88%E7%94%BB%E3%82%92%E7%AD%96%E5%AE%9A%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F/",
+        "https://www.vill.noda.iwate.jp/soshiki/hokenfukushika/fukushihan/koreishafukushi/435.html"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026） + 公式構成説明",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "岩手県",
+      "insurer_name": "一関地区広域行政組合",
+      "category1_insured_total": 43546,
+      "age75plus": 24936,
+      "local_government_code": null,
+      "local_government_codes": [
+        "032093",
+        "034029"
+      ],
+      "member_names": [
+        "一関市",
+        "平泉町"
+      ],
+      "membership_source_urls": [
+        "https://www.city.ichinoseki.iwate.jp/kouiki-gyousei/insurance/7/981/"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "秋田県",
+      "insurer_name": "大曲仙北広域市町村圏組合",
+      "category1_insured_total": 46814,
+      "age75plus": 26984,
+      "local_government_code": null,
+      "local_government_codes": [
+        "052124",
+        "052159",
+        "054348"
+      ],
+      "member_names": [
+        "大仙市",
+        "仙北市",
+        "美郷町"
+      ],
+      "membership_source_urls": [
+        "https://www.oskaigonet.or.jp/other/keikaku/jigyoplan",
+        "https://www.oskaigonet.or.jp/ippan/riyou/pamphlet/hokenryo"
+      ],
+      "membership_temporal_basis": "第9期（2024-2026）保険料・事業計画の公式ページ",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "佐賀県",
+      "insurer_name": "鳥栖地区広域市町村圏組合",
+      "category1_insured_total": 35012,
+      "age75plus": 19976,
+      "local_government_code": null,
+      "local_government_codes": [
+        "412031",
+        "413411",
+        "413461",
+        "413453"
+      ],
+      "member_names": [
+        "鳥栖市",
+        "基山町",
+        "みやき町",
+        "上峰町"
+      ],
+      "membership_source_urls": [
+        "https://tosu-kouiki.jp/wp-content/uploads/2025/04/plan-9ki-gaiyou.pdf"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "佐賀県",
+      "insurer_name": "佐賀中部広域連合",
+      "category1_insured_total": 101129,
+      "age75plus": 56951,
+      "local_government_code": null,
+      "local_government_codes": [
+        "412015",
+        "412040",
+        "412082",
+        "412104",
+        "413275"
+      ],
+      "member_names": [
+        "佐賀市",
+        "多久市",
+        "小城市",
+        "神埼市",
+        "吉野ヶ里町"
+      ],
+      "membership_source_urls": [
+        "https://www.chubu.saga.saga.jp/var/rev0/0005/9066/12451115230.pdf"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
+    }
+  ],
+  "match_rules": [
+    "都道府県 + 保険者名がJ-LISの1団体に完全一致した場合は直接結合",
+    "分析時点を包含する公式資料で構成自治体が確認でき、各構成自治体名がJ-LISに完全一致する場合は保険者単位の集合として結合",
+    "広域保険者の需要分母は構成自治体へ按分せず、構成自治体の事業所数を保険者単位へ合算する"
+  ],
+  "blocked": [
+    {
+      "prefecture": "北海道",
+      "insurer_name": "空知中部広域連合",
+      "category1_insured_total": 8431,
+      "age75plus": 5327,
       "candidate_count": 0,
       "block_reason": "wide_area_union"
     },
@@ -68,52 +311,12 @@
       "block_reason": "no_exact_current_local_government_match"
     },
     {
-      "prefecture": "岩手県",
-      "insurer_name": "二戸地区広域行政事務組合",
-      "category1_insured_total": 19962,
-      "age75plus": 11527,
-      "candidate_count": 0,
-      "block_reason": "administrative_union_or_association"
-    },
-    {
-      "prefecture": "岩手県",
-      "insurer_name": "盛岡北部行政事務組合",
-      "category1_insured_total": 17420,
-      "age75plus": 9967,
-      "candidate_count": 0,
-      "block_reason": "administrative_union_or_association"
-    },
-    {
-      "prefecture": "岩手県",
-      "insurer_name": "久慈広域連合",
-      "category1_insured_total": 20404,
-      "age75plus": 11551,
-      "candidate_count": 0,
-      "block_reason": "wide_area_union"
-    },
-    {
-      "prefecture": "岩手県",
-      "insurer_name": "一関地区広域行政組合",
-      "category1_insured_total": 43546,
-      "age75plus": 24936,
-      "candidate_count": 0,
-      "block_reason": "administrative_union_or_association"
-    },
-    {
       "prefecture": "宮城県",
       "insurer_name": "七ヶ宿町",
       "category1_insured_total": 524,
       "age75plus": 323,
       "candidate_count": 0,
       "block_reason": "no_exact_current_local_government_match"
-    },
-    {
-      "prefecture": "秋田県",
-      "insurer_name": "大曲仙北広域市町村圏組合",
-      "category1_insured_total": 46814,
-      "age75plus": 26984,
-      "candidate_count": 0,
-      "block_reason": "administrative_union_or_association"
     },
     {
       "prefecture": "埼玉県",
@@ -340,22 +543,6 @@
       "block_reason": "administrative_union_or_association"
     },
     {
-      "prefecture": "佐賀県",
-      "insurer_name": "鳥栖地区広域市町村圏組合",
-      "category1_insured_total": 35012,
-      "age75plus": 19976,
-      "candidate_count": 0,
-      "block_reason": "administrative_union_or_association"
-    },
-    {
-      "prefecture": "佐賀県",
-      "insurer_name": "佐賀中部広域連合",
-      "category1_insured_total": 101129,
-      "age75plus": 56951,
-      "candidate_count": 0,
-      "block_reason": "wide_area_union"
-    },
-    {
       "prefecture": "長崎県",
       "insurer_name": "島原地域広域市町村圏組合",
       "category1_insured_total": 47731,
@@ -373,9 +560,9 @@
     }
   ],
   "boundaries": [
-    "広域連合・行政組合等の構成市町村は推測しない",
     "表記差だけで同一団体とみなさない",
     "名称の部分一致・類似度・手動補完を使わない",
-    "J-LISの現行情報と2026-06-30時点が完全に同一であることの時点検証は別途必要"
+    "未検証の広域連合・行政組合は市区町村へ推測配賦しない",
+    "直接J-LIS一致は現行地理であり、2026-06-30時点との完全同一性は別途時点検証が必要"
   ]
 }
