@@ -6,9 +6,12 @@ from __future__ import annotations
 import argparse
 import hashlib
 from html.parser import HTMLParser
+import io
 import json
 from pathlib import Path
 import re
+import xml.etree.ElementTree as ET
+import zipfile
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
@@ -63,6 +66,81 @@ def decode_html(raw: bytes) -> tuple[str, str]:
         except UnicodeDecodeError:
             continue
     raise UnicodeDecodeError("unknown", b"", 0, 1, "unsupported HTML encoding")
+
+
+def _xlsx_shared_strings(zf: zipfile.ZipFile) -> list[str]:
+    path = "xl/sharedStrings.xml"
+    if path not in zf.namelist():
+        return []
+    root = ET.fromstring(zf.read(path))
+    ns = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+    values = []
+    for item in root.findall("m:si", ns):
+        values.append("".join(node.text or "" for node in item.findall(".//m:t", ns)))
+    return values
+
+
+def _xlsx_cell_value(cell: ET.Element, shared: list[str]) -> str | None:
+    ns = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+    cell_type = cell.attrib.get("t")
+    if cell_type == "inlineStr":
+        return "".join(node.text or "" for node in cell.findall(".//m:t", ns))
+    value = cell.find("m:v", ns)
+    if value is None or value.text is None:
+        return None
+    if cell_type == "s":
+        try:
+            return shared[int(value.text)]
+        except (ValueError, IndexError):
+            return value.text
+    return value.text
+
+
+def inspect_xlsx(raw: bytes, max_rows: int = 20) -> dict:
+    with zipfile.ZipFile(io.BytesIO(raw)) as zf:
+        main_ns = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+        rel_ns = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+        pkg_rel_ns = "http://schemas.openxmlformats.org/package/2006/relationships"
+        workbook = ET.fromstring(zf.read("xl/workbook.xml"))
+        rels = ET.fromstring(zf.read("xl/_rels/workbook.xml.rels"))
+        rel_map = {
+            rel.attrib["Id"]: rel.attrib["Target"]
+            for rel in rels.findall(f"{{{pkg_rel_ns}}}Relationship")
+        }
+        shared = _xlsx_shared_strings(zf)
+        sheet_summaries = []
+        for sheet in workbook.findall(f".//{{{main_ns}}}sheet"):
+            rel_id = sheet.attrib[f"{{{rel_ns}}}id"]
+            target = rel_map[rel_id].lstrip("/")
+            sheet_path = target if target.startswith("xl/") else f"xl/{target}"
+            sheet_root = ET.fromstring(zf.read(sheet_path))
+            dimension = sheet_root.find(f"{{{main_ns}}}dimension")
+            sample_rows = []
+            for row in sheet_root.findall(f".//{{{main_ns}}}sheetData/{{{main_ns}}}row"):
+                cells = []
+                for cell in row.findall(f"{{{main_ns}}}c"):
+                    value = _xlsx_cell_value(cell, shared)
+                    if value not in (None, ""):
+                        cells.append({
+                            "cell": cell.attrib.get("r"),
+                            "value": value,
+                        })
+                if cells:
+                    sample_rows.append({
+                        "row": int(row.attrib.get("r", "0")),
+                        "cells": cells,
+                    })
+                if len(sample_rows) >= max_rows:
+                    break
+            sheet_summaries.append({
+                "name": sheet.attrib["name"],
+                "dimension": dimension.attrib.get("ref") if dimension is not None else None,
+                "sample_rows": sample_rows,
+            })
+        return {
+            "sheet_count": len(sheet_summaries),
+            "sheets": sheet_summaries,
+        }
 
 
 def classify_file(raw: bytes) -> str:
@@ -128,6 +206,7 @@ def main() -> None:
             "sha256": hashlib.sha256(raw).hexdigest(),
             "file_signature": classify_file(raw),
             "extension": Path(file_url.split("?", 1)[0]).suffix.lower(),
+            "xlsx_structure": inspect_xlsx(raw) if classify_file(raw) == "zip_container_likely_xlsx" else None,
         })
 
     result = {
