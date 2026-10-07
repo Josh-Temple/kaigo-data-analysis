@@ -1,0 +1,16 @@
+{
+  "schema_version": "0.1",
+  "source_id": "mlit_future_population_250m_2024",
+  "publisher": "国土交通省",
+  "landing_page": "https://nlftp.mlit.go.jp/ksj/old/datalist/old_KsjTmplt-m250r6.html",
+  "reference_page": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh250r6.html",
+  "prefecture": "神奈川県",
+  "prefecture_code": "14",
+  "expected_filename": "250m_mesh_suikei_2024_csv_14.zip",
+  "expected_format": "CSV in ZIP",
+  "expected_encoding": "Shift-JIS",
+  "data_year": 2024,
+  "baseline_year": 2020,
+  "projection_years": [2025,2030,2035,2040,2045,2050,2055,2060,2065,2070],
+  "pilot_target": "横浜市"
+}
