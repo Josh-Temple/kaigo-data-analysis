@@ -1,0 +1,10 @@
+{
+  "schema_version": "0.1",
+  "source_id": "digital_government_local_governments_2026_06_30",
+  "publisher": "デジタル庁",
+  "landing_page": "https://www.digital.go.jp/resources/data_local_governments",
+  "csv_url": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/2b1128e2-c699-4aa0-9206-37169a6697c8/3d2142af/20260630_resources_opendata_lg_list_02.csv",
+  "as_of": "2026-06-30",
+  "purpose": "current local-government code/name reference for conservative insurer-to-municipality matching only",
+  "qualification_note": "Use only for current municipality identity/code reference; not as insurer-membership evidence."
+}

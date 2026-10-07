@@ -1,0 +1,394 @@
+{
+  "schema_version": "0.1",
+  "demand_period": "2026-06",
+  "qualification_rule": "Use only memberships supported by official sources whose validity/current plan covers 2026-06. Member names must resolve exactly to one J-LIS local-government body in the same prefecture.",
+  "insurers": [
+    {
+      "prefecture": "愛知県",
+      "insurer_name": "知多北部広域連合",
+      "members": [
+        "東海市",
+        "大府市",
+        "知多市",
+        "東浦町"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026） + 公式介護保険制度ページ",
+      "source_urls": [
+        "https://www.chitahokubu.or.jp/statistical-information/management-plan/dai9ki/",
+        "https://www.chitahokubu.or.jp/for-insured/about-care-insurance/"
+      ]
+    },
+    {
+      "prefecture": "愛知県",
+      "insurer_name": "東三河広域連合",
+      "members": [
+        "豊橋市",
+        "豊川市",
+        "蒲郡市",
+        "新城市",
+        "田原市",
+        "設楽町",
+        "東栄町",
+        "豊根村"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://www.east-mikawa.jp/1160.htm",
+        "https://www.east-mikawa.jp/secure/1175/kaigohoken202403.pdf"
+      ]
+    },
+    {
+      "prefecture": "沖縄県",
+      "insurer_name": "沖縄県介護保険広域連合",
+      "members": [
+        "国頭村",
+        "大宜味村",
+        "東村",
+        "今帰仁村",
+        "本部町",
+        "恩納村",
+        "宜野座村",
+        "金武町",
+        "伊江村",
+        "伊平屋村",
+        "伊是名村",
+        "読谷村",
+        "嘉手納町",
+        "北谷町",
+        "北中城村",
+        "中城村",
+        "西原町",
+        "豊見城市",
+        "八重瀬町",
+        "南城市",
+        "与那原町",
+        "久米島町",
+        "南風原町",
+        "渡嘉敷村",
+        "座間味村",
+        "粟国村",
+        "渡名喜村",
+        "南大東村",
+        "北大東村"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）・第9期版公式ガイド",
+      "source_urls": [
+        "https://www.okinawa-kouiki.jp/_files/00171083/09keikaku.pdf",
+        "https://www.okinawa-kouiki.jp/docs/2012110500026/file_contents/gaido.pdf"
+      ]
+    },
+    {
+      "prefecture": "岩手県",
+      "insurer_name": "一関地区広域行政組合",
+      "members": [
+        "一関市",
+        "平泉町"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://www.city.ichinoseki.iwate.jp/kouiki-gyousei/insurance/7/981/"
+      ]
+    },
+    {
+      "prefecture": "岩手県",
+      "insurer_name": "久慈広域連合",
+      "members": [
+        "久慈市",
+        "洋野町",
+        "野田村",
+        "普代村"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026） + 公式構成説明",
+      "source_urls": [
+        "https://www.kuji-kouiki.jp/kaigo/%E7%AC%AC%EF%BC%99%E6%9C%9F%E4%BB%8B%E8%AD%B7%E4%BF%9D%E9%99%BA%E4%BA%8B%E6%A5%AD%E8%A8%88%E7%94%BB%E3%82%92%E7%AD%96%E5%AE%9A%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F/",
+        "https://www.vill.noda.iwate.jp/soshiki/hokenfukushika/fukushihan/koreishafukushi/435.html"
+      ]
+    },
+    {
+      "prefecture": "岩手県",
+      "insurer_name": "盛岡北部行政事務組合",
+      "members": [
+        "八幡平市",
+        "葛巻町",
+        "岩手町"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://m-hokubu.or.jp/mhg/wp-content/uploads/2021/05/8243a53a84193650b960f803fef304a4.pdf"
+      ]
+    },
+    {
+      "prefecture": "岩手県",
+      "insurer_name": "二戸地区広域行政事務組合",
+      "members": [
+        "二戸市",
+        "一戸町",
+        "軽米町",
+        "九戸村"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://www.cassiopeia.or.jp/wordpress/wp-content/uploads/2012/01/3aa8d56571b90564aa2db69034996d19.pdf"
+      ]
+    },
+    {
+      "prefecture": "佐賀県",
+      "insurer_name": "佐賀中部広域連合",
+      "members": [
+        "佐賀市",
+        "多久市",
+        "小城市",
+        "神埼市",
+        "吉野ヶ里町"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://www.chubu.saga.saga.jp/var/rev0/0005/9066/12451115230.pdf"
+      ]
+    },
+    {
+      "prefecture": "佐賀県",
+      "insurer_name": "鳥栖地区広域市町村圏組合",
+      "members": [
+        "鳥栖市",
+        "基山町",
+        "みやき町",
+        "上峰町"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://tosu-kouiki.jp/wp-content/uploads/2025/04/plan-9ki-gaiyou.pdf"
+      ]
+    },
+    {
+      "prefecture": "埼玉県",
+      "insurer_name": "大里広域市町村圏組合",
+      "members": [
+        "熊谷市",
+        "深谷市",
+        "寄居町"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://www.osato-k.jp/kaigohoken/plan/"
+      ]
+    },
+    {
+      "prefecture": "三重県",
+      "insurer_name": "鈴鹿亀山地区広域連合",
+      "members": [
+        "鈴鹿市",
+        "亀山市"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://www.suzukakameyama-kouiki.jp/insurance/kaigoplan.html",
+        "https://www.suzukakameyama-kouiki.jp/insurance/file_plan7/d9_keikaku_20240401.pdf?20240419000000="
+      ]
+    },
+    {
+      "prefecture": "秋田県",
+      "insurer_name": "大曲仙北広域市町村圏組合",
+      "members": [
+        "大仙市",
+        "仙北市",
+        "美郷町"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期（2024-2026）保険料・事業計画の公式ページ",
+      "source_urls": [
+        "https://www.oskaigonet.or.jp/other/keikaku/jigyoplan",
+        "https://www.oskaigonet.or.jp/ippan/riyou/pamphlet/hokenryo"
+      ]
+    },
+    {
+      "prefecture": "長崎県",
+      "insurer_name": "島原地域広域市町村圏組合",
+      "members": [
+        "島原市",
+        "雲仙市",
+        "南島原市"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://www.shimabara-area.net/kaigo/kiji003673/index.html",
+        "https://www.shimabara-area.net/kaigo/kiji003682/3_682_shiryou1_5klm45ua.pdf"
+      ]
+    },
+    {
+      "prefecture": "長野県",
+      "insurer_name": "諏訪広域連合",
+      "members": [
+        "岡谷市",
+        "諏訪市",
+        "茅野市",
+        "下諏訪町",
+        "富士見町",
+        "原村"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026） + 2026-06-30公式サービスコード",
+      "source_urls": [
+        "https://www.union.suwa.lg.jp/site/kaigo/jigyo-keikaku.html",
+        "https://www.union.suwa.lg.jp/uploaded/attachment/13884.pdf",
+        "https://www.union.suwa.lg.jp/site/kaigo/0001474.html"
+      ]
+    },
+    {
+      "prefecture": "富山県",
+      "insurer_name": "新川地域介護保険・ケーブルテレビ事業組合",
+      "members": [
+        "黒部市",
+        "入善町",
+        "朝日町"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "富山県第9期介護保険事業支援計画（2024-2026）",
+      "source_urls": [
+        "https://www.pref.toyama.jp/1211/kurashi/kenkou/iryou/kj00003938.html"
+      ]
+    },
+    {
+      "prefecture": "富山県",
+      "insurer_name": "中新川広域行政事務組合",
+      "members": [
+        "舟橋村",
+        "上市町",
+        "立山町"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "富山県第9期介護保険事業支援計画（2024-2026）",
+      "source_urls": [
+        "https://www.pref.toyama.jp/1211/kurashi/kenkou/iryou/kj00003938.html"
+      ]
+    },
+    {
+      "prefecture": "富山県",
+      "insurer_name": "砺波地方介護保険組合",
+      "members": [
+        "砺波市",
+        "小矢部市",
+        "南砺市"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://pci-area.tonami.toyama.jp/9pamphlet.pdf",
+        "https://www.pci-area.tonami.toyama.jp/kumiai/010/kumiai.html"
+      ]
+    },
+    {
+      "prefecture": "福岡県",
+      "insurer_name": "福岡県介護保険広域連合",
+      "members": [
+        "宇美町",
+        "篠栗町",
+        "志免町",
+        "須恵町",
+        "新宮町",
+        "久山町",
+        "芦屋町",
+        "水巻町",
+        "岡垣町",
+        "遠賀町",
+        "宮若市",
+        "小竹町",
+        "鞍手町",
+        "筑前町",
+        "東峰村",
+        "うきは市",
+        "大刀洗町",
+        "柳川市",
+        "大木町",
+        "広川町",
+        "田川市",
+        "桂川町",
+        "香春町",
+        "添田町",
+        "糸田町",
+        "川崎町",
+        "大任町",
+        "福智町",
+        "赤村",
+        "豊前市",
+        "吉富町",
+        "上毛町",
+        "築上町"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://www.fukuoka-kaigo.jp/about/committee/session/img/keikaku_9.pdf",
+        "https://www.fukuoka-kaigo.jp/about/committee/session/9session.html"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "insurer_name": "後志広域連合",
+      "members": [
+        "島牧村",
+        "黒松内町",
+        "蘭越町",
+        "ニセコ町",
+        "真狩村",
+        "留寿都村",
+        "喜茂別町",
+        "京極町",
+        "倶知安町",
+        "共和町",
+        "泊村",
+        "神恵内村",
+        "積丹町",
+        "古平町",
+        "仁木町",
+        "赤井川村"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "source_urls": [
+        "https://www.shiribeshi-kouiki.jp/file/contents/418/3979/dai9ki_keikakusyo.pdf"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "insurer_name": "大雪地区広域連合",
+      "members": [
+        "東川町",
+        "美瑛町",
+        "東神楽町"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "公式現行構成ページ + 2026年度第9期保険料ページ",
+      "source_urls": [
+        "https://taisetsu-kouiki.jp/",
+        "https://taisetsu-kouiki.jp/2026/06/16/4-3-2-2-2/"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "insurer_name": "日高中部広域連合",
+      "members": [
+        "新冠町",
+        "新ひだか町"
+      ],
+      "status": "qualified_for_2026_06",
+      "temporal_basis": "第9期（2024-2026）と北海道公式オープンデータの現行構成",
+      "source_urls": [
+        "https://www.niikappu.jp/kurashi/kenko/documents/dai9kiniiikapputyoukoureisyahokennhukusikeikaku.pdf",
+        "https://www.harp.lg.jp/opendata/dataset/1727/resource/3998/content.html"
+      ]
+    }
+  ]
+}

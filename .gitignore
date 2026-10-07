@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local/raw analytical data
+data/raw/*
+data/staged/*
+data/curated/*
+data/published/*
+!data/README.md
+!data/raw/.gitkeep
+!data/staged/.gitkeep
+!data/curated/.gitkeep
+!data/published/.gitkeep
+
+# Common large formats
+*.parquet
+*.feather
+*.zip
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/

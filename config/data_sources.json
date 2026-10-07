@@ -1,0 +1,93 @@
+{
+  "schema_version": "0.1",
+  "verified_at": "2026-10-07",
+  "datasets": [
+    {
+      "id": "mhlw_kaigo_service_offices",
+      "title": "介護サービス情報公表システム 事業所オープンデータ",
+      "publisher": "厚生労働省",
+      "landing_page": "https://www.mhlw.go.jp/stf/kaigo-kouhyou_opendata.html",
+      "geographic_grain": "事業所",
+      "temporal_grain": "スナップショット",
+      "cadence": "毎年6月末・12月末",
+      "latest_verified_period": "2026-06-30",
+      "latest_verified_publication_date": "2026-07-09",
+      "license_note": "厚生労働省ホームページ利用規約およびCC BYに準拠",
+      "status": "qualified",
+      "intended_use": [
+        "サービス別事業所数",
+        "地域別掲載数",
+        "スナップショット間の掲載状況変化"
+      ],
+      "limits": [
+        "掲載消失を廃業と自動判定しない",
+        "事業所数を供給能力そのものとみなさない"
+      ]
+    },
+    {
+      "id": "mhlw_long_term_care_insurance_status",
+      "title": "介護保険事業状況報告",
+      "publisher": "厚生労働省",
+      "landing_page": "https://www.e-stat.go.jp/stat-search?toukei=00450351",
+      "geographic_grain": "全国・都道府県・保険者",
+      "temporal_grain": "月・年",
+      "cadence": "月報・年報",
+      "latest_verified_period": "2026-06",
+      "latest_verified_publication_date": "2026-09-10",
+      "license_note": "政府統計・配布元の利用条件を取得時に確認",
+      "status": "qualified",
+      "intended_use": [
+        "第1号被保険者数",
+        "要介護・要支援認定者数",
+        "サービス受給者数",
+        "給付費"
+      ],
+      "limits": [
+        "保険者と市区町村が一対一とは限らない",
+        "暫定月報と確報・年報を混同しない"
+      ]
+    },
+    {
+      "id": "mlit_future_population_250m_2024",
+      "title": "250mメッシュ別将来推計人口データ（R6国政局推計）",
+      "publisher": "国土交通省",
+      "landing_page": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh250r6.html",
+      "geographic_grain": "250mメッシュ",
+      "temporal_grain": "将来推計",
+      "cadence": "不定期",
+      "latest_verified_period": "2020 baseline, projections through 2070",
+      "latest_verified_publication_date": "2024年度データ",
+      "license_note": "国土数値情報ダウンロードサービスの利用条件を取得時に確認",
+      "status": "qualified",
+      "intended_use": [
+        "将来人口",
+        "年齢階級別人口",
+        "地域内の人口構成変化"
+      ],
+      "limits": [
+        "推計値であり将来の介護需要量そのものではない",
+        "全国ファイルは大容量のため都道府県単位または必要範囲で取得する"
+      ]
+    },
+    {
+      "id": "mlit_human_flow_2019_2021",
+      "title": "全国の人流データ（1kmメッシュ、市町村単位発地別）",
+      "publisher": "国土交通省",
+      "landing_page": "https://www.mlit.go.jp/tochi_fudousan_kensetsugyo/tochi_fudousan_kensetsugyo_fr17_000001_00006.html",
+      "geographic_grain": "1kmメッシュ等",
+      "temporal_grain": "2019-01 to 2021-12",
+      "cadence": "公開済み過去データ",
+      "latest_verified_period": "2019-01 to 2021-12",
+      "latest_verified_publication_date": null,
+      "license_note": "配布元の利用条件を取得時に確認",
+      "status": "secondary_only",
+      "intended_use": [
+        "過去の地域活動・アクセス環境に関する補助分析"
+      ],
+      "limits": [
+        "現在の人流として扱わない",
+        "高齢者の移動や介護需要の直接代理変数にしない"
+      ]
+    }
+  ]
+}

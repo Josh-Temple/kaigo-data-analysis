@@ -1,0 +1,40 @@
+name: Build visit-care demand-normalized pilot
+
+on:
+  pull_request:
+    paths:
+      - "scripts/build_visit_care_pilot.py"
+      - ".github/workflows/build-visit-care-pilot.yml"
+      - "config/jlis_local_government_codes.json"
+      - "config/qualified_insurer_memberships.json"
+      - "config/mhlw_ltc_status_monthly.json"
+      - "config/mhlw_visit_care_snapshots.json"
+      - "scripts/qualify_insurer_municipality_crosswalk.py"
+      - "scripts/probe_mhlw_ltc_status.py"
+      - "scripts/probe_mhlw_visit_care.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build demand-normalized visit-care pilot
+        run: |
+          python scripts/build_visit_care_pilot.py \
+            --jlis-config config/jlis_local_government_codes.json \
+            --ltc-config config/mhlw_ltc_status_monthly.json \
+            --office-config config/mhlw_visit_care_snapshots.json \
+            --membership-config config/qualified_insurer_memberships.json \
+            --output /tmp/visit-care-pilot.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: visit-care-pilot
+          path: /tmp/visit-care-pilot.json
+          retention-days: 14

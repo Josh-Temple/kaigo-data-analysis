@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1",
+  "source_id": "mhlw_long_term_care_insurance_status",
+  "period": "2026-06",
+  "landing_page": "https://www.mhlw.go.jp/topics/kaigo/osirase/jigyo/m26/2606.html",
+  "target_tables": [
+    {
+      "id": "insurer_category1_population",
+      "anchor_contains": "第１表　第１号被保険者数",
+      "expected_occurrence": "last"
+    },
+    {
+      "id": "insurer_certified_total",
+      "anchor_contains": "第２－１表　要介護（要支援）認定者数　男女計",
+      "expected_occurrence": "last"
+    }
+  ]
+}

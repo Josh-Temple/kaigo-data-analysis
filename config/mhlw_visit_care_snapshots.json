@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1",
+  "source_id": "mhlw_kaigo_service_offices",
+  "service_code": "110",
+  "service_name": "訪問介護",
+  "source_page": "https://www.mhlw.go.jp/stf/kaigo-kouhyou_opendata.html",
+  "snapshots": [
+    {
+      "as_of": "2025-12-31",
+      "published_at": "2026-01-14",
+      "url": "https://www.mhlw.go.jp/content/12300000/jigyosho_110.csv"
+    },
+    {
+      "as_of": "2026-06-30",
+      "published_at": "2026-07-09",
+      "url": "https://www.mhlw.go.jp/content/12300000/jigyosho_110_all_20260709180319.csv"
+    }
+  ]
+}

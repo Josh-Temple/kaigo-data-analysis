@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.1",
+  "source_id": "jlis_local_government_codes",
+  "publisher": "地方公共団体情報システム機構（J-LIS）",
+  "index_url": "https://www.j-lis.go.jp/spd/code-address/jititai-code.html",
+  "fetched_for": "2026-06 demand-data crosswalk qualification",
+  "matching_policy": {
+    "allowed": "exact prefecture + insurer name match to one current J-LIS local-government body",
+    "blocked": [
+      "fuzzy name matching",
+      "substring matching",
+      "wide-area union inference",
+      "administrative-union membership inference",
+      "manual municipality assignment without an official source"
+    ]
+  }
+}

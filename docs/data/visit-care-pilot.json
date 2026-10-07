@@ -1,0 +1,264 @@
+{
+  "schema_version": "0.3",
+  "status": "pilot_observation_only",
+  "generated_from_action_run": 37641421076,
+  "service": "訪問介護",
+  "office_snapshot": "2026-06-30",
+  "demand_period": "2026-06",
+  "matched_insurer_count": 1552,
+  "blocked_insurer_count": 22,
+  "population_coverage": {
+    "category1_insured_percent": 99.04035543568203,
+    "age75plus_percent": 99.02829190407849,
+    "category1_certified_percent": 99.09860851161014
+  },
+  "metric_distribution": {
+    "unit": "listed home-visit-care offices per 10,000 age-75-plus category-1 insured persons",
+    "n": 1552,
+    "p25": 8.196725438396422,
+    "median": 11.951001963149352,
+    "p75": 17.034835053426164
+  },
+  "yokohama": {
+    "prefecture": "神奈川県",
+    "insurer_name": "横浜市",
+    "age75plus": 568509,
+    "category1_certified": 199792,
+    "visit_care_office_count": 847,
+    "offices_per_10k_age75plus": 14.898620778211074,
+    "offices_per_10k_category1_certified": 42.39408985344759,
+    "ward_count": 18
+  },
+  "designated_cities": [
+    {
+      "prefecture": "大阪府",
+      "insurer_name": "大阪市",
+      "age75plus": 403865,
+      "category1_certified": 192635,
+      "visit_care_office_count": 2173,
+      "offices_per_10k_age75plus": 53.805108142572394,
+      "offices_per_10k_category1_certified": 112.80400757910036,
+      "ward_count": 24
+    },
+    {
+      "prefecture": "大阪府",
+      "insurer_name": "堺市",
+      "age75plus": 144702,
+      "category1_certified": 62476,
+      "visit_care_office_count": 496,
+      "offices_per_10k_age75plus": 34.277342400243256,
+      "offices_per_10k_category1_certified": 79.39048594660349,
+      "ward_count": 7
+    },
+    {
+      "prefecture": "愛知県",
+      "insurer_name": "名古屋市",
+      "age75plus": 343114,
+      "category1_certified": 125300,
+      "visit_care_office_count": 1012,
+      "offices_per_10k_age75plus": 29.49457031773696,
+      "offices_per_10k_category1_certified": 80.7661612130886,
+      "ward_count": 16
+    },
+    {
+      "prefecture": "熊本県",
+      "insurer_name": "熊本市",
+      "age75plus": 114674,
+      "category1_certified": 42264,
+      "visit_care_office_count": 304,
+      "offices_per_10k_age75plus": 26.509932504316584,
+      "offices_per_10k_category1_certified": 71.92882831724398,
+      "ward_count": 5
+    },
+    {
+      "prefecture": "福岡県",
+      "insurer_name": "福岡市",
+      "age75plus": 204181,
+      "category1_certified": 75546,
+      "visit_care_office_count": 488,
+      "offices_per_10k_age75plus": 23.900362913297514,
+      "offices_per_10k_category1_certified": 64.59640483943558,
+      "ward_count": 7
+    },
+    {
+      "prefecture": "京都府",
+      "insurer_name": "京都市",
+      "age75plus": 244973,
+      "category1_certified": 104632,
+      "visit_care_office_count": 554,
+      "offices_per_10k_age75plus": 22.614737134296433,
+      "offices_per_10k_category1_certified": 52.9474730483982,
+      "ward_count": 11
+    },
+    {
+      "prefecture": "兵庫県",
+      "insurer_name": "神戸市",
+      "age75plus": 261388,
+      "category1_certified": 99272,
+      "visit_care_office_count": 543,
+      "offices_per_10k_age75plus": 20.773715702327575,
+      "offices_per_10k_category1_certified": 54.69820291723749,
+      "ward_count": 9
+    },
+    {
+      "prefecture": "岡山県",
+      "insurer_name": "岡山市",
+      "age75plus": 113999,
+      "category1_certified": 43576,
+      "visit_care_office_count": 223,
+      "offices_per_10k_age75plus": 19.56157510153598,
+      "offices_per_10k_category1_certified": 51.17495869285845,
+      "ward_count": 4
+    },
+    {
+      "prefecture": "神奈川県",
+      "insurer_name": "川崎市",
+      "age75plus": 180928,
+      "category1_certified": 65810,
+      "visit_care_office_count": 352,
+      "offices_per_10k_age75plus": 19.45525291828794,
+      "offices_per_10k_category1_certified": 53.48731195866889,
+      "ward_count": 7
+    },
+    {
+      "prefecture": "福岡県",
+      "insurer_name": "北九州市",
+      "age75plus": 173985,
+      "category1_certified": 67782,
+      "visit_care_office_count": 332,
+      "offices_per_10k_age75plus": 19.082104779147627,
+      "offices_per_10k_category1_certified": 48.980555309669235,
+      "ward_count": 7
+    },
+    {
+      "prefecture": "神奈川県",
+      "insurer_name": "相模原市",
+      "age75plus": 115338,
+      "category1_certified": 39082,
+      "visit_care_office_count": 217,
+      "offices_per_10k_age75plus": 18.814267630789505,
+      "offices_per_10k_category1_certified": 55.524282278286684,
+      "ward_count": 3
+    },
+    {
+      "prefecture": "広島県",
+      "insurer_name": "広島市",
+      "age75plus": 187500,
+      "category1_certified": 62536,
+      "visit_care_office_count": 322,
+      "offices_per_10k_age75plus": 17.173333333333332,
+      "offices_per_10k_category1_certified": 51.49034156325956,
+      "ward_count": 8
+    },
+    {
+      "prefecture": "千葉県",
+      "insurer_name": "千葉市",
+      "age75plus": 158535,
+      "category1_certified": 53787,
+      "visit_care_office_count": 268,
+      "offices_per_10k_age75plus": 16.90478443245971,
+      "offices_per_10k_category1_certified": 49.826166173982564,
+      "ward_count": 6
+    },
+    {
+      "prefecture": "宮城県",
+      "insurer_name": "仙台市",
+      "age75plus": 153951,
+      "category1_certified": 54595,
+      "visit_care_office_count": 239,
+      "offices_per_10k_age75plus": 15.524420107696606,
+      "offices_per_10k_category1_certified": 43.77690264676252,
+      "ward_count": 5
+    },
+    {
+      "prefecture": "神奈川県",
+      "insurer_name": "横浜市",
+      "age75plus": 568509,
+      "category1_certified": 199792,
+      "visit_care_office_count": 847,
+      "offices_per_10k_age75plus": 14.898620778211074,
+      "offices_per_10k_category1_certified": 42.39408985344759,
+      "ward_count": 18
+    },
+    {
+      "prefecture": "北海道",
+      "insurer_name": "札幌市",
+      "age75plus": 322727,
+      "category1_certified": 127348,
+      "visit_care_office_count": 477,
+      "offices_per_10k_age75plus": 14.780294180530293,
+      "offices_per_10k_category1_certified": 37.456418632408834,
+      "ward_count": 10
+    },
+    {
+      "prefecture": "埼玉県",
+      "insurer_name": "さいたま市",
+      "age75plus": 186874,
+      "category1_certified": 63494,
+      "visit_care_office_count": 263,
+      "offices_per_10k_age75plus": 14.073653905840297,
+      "offices_per_10k_category1_certified": 41.421236652282104,
+      "ward_count": 10
+    },
+    {
+      "prefecture": "静岡県",
+      "insurer_name": "静岡市",
+      "age75plus": 127167,
+      "category1_certified": 44226,
+      "visit_care_office_count": 159,
+      "offices_per_10k_age75plus": 12.503243766071387,
+      "offices_per_10k_category1_certified": 35.95170261836928,
+      "ward_count": 3
+    },
+    {
+      "prefecture": "新潟県",
+      "insurer_name": "新潟市",
+      "age75plus": 136385,
+      "category1_certified": 47694,
+      "visit_care_office_count": 152,
+      "offices_per_10k_age75plus": 11.14492062910144,
+      "offices_per_10k_category1_certified": 31.869836876755986,
+      "ward_count": 8
+    },
+    {
+      "prefecture": "静岡県",
+      "insurer_name": "浜松市",
+      "age75plus": 132473,
+      "category1_certified": 42996,
+      "visit_care_office_count": 143,
+      "offices_per_10k_age75plus": 10.794652495225442,
+      "offices_per_10k_category1_certified": 33.25890780537725,
+      "ward_count": 3
+    }
+  ],
+  "interpretation_limits": [
+    "事業所数は掲載数であり、定員・職員数・稼働量・利用可能量・品質を表さない",
+    "分母は第1号被保険者の75歳以上人口であり、訪問介護の実利用者数ではない",
+    "地域差は観察値であり、不足・過剰を単独で判定しない",
+    "検証済み広域保険者は構成自治体の事業所掲載数を保険者単位へ合算し、需要分母は市町村へ按分しない",
+    "未解決保険者は除外し、推測補完しない"
+  ],
+  "sources": [
+    {
+      "title": "介護サービス情報公表システム 事業所オープンデータ",
+      "publisher": "厚生労働省",
+      "url": "https://www.mhlw.go.jp/stf/kaigo-kouhyou_opendata.html"
+    },
+    {
+      "title": "介護保険事業状況報告 令和8年6月分",
+      "publisher": "厚生労働省",
+      "url": "https://www.mhlw.go.jp/topics/kaigo/osirase/jigyo/m26/2606.html"
+    },
+    {
+      "title": "地方公共団体コード住所",
+      "publisher": "J-LIS",
+      "url": "https://www.j-lis.go.jp/spd/code-address/jititai-code.html"
+    }
+  ],
+  "qualified_group_insurer_count": 21,
+  "geography_mode_counts": {
+    "designated_city_plus_wards": 20,
+    "direct_local_government": 1511,
+    "qualified_insurer_membership_aggregate": 21
+  }
+}

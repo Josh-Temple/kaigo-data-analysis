@@ -1,0 +1,287 @@
+{
+  "schema_version": "0.1",
+  "audit_type": "mhlw_office_snapshot_source_probe",
+  "recorded_at": "2026-10-07",
+  "evidence": {
+    "github_action_run_id": 37634137926,
+    "github_action_run_url": "https://github.com/Josh-Temple/kaigo-data-analysis/actions/runs/37634137926",
+    "tested_commit": "e86fce5e51b50447c048415948386b99e6f03329",
+    "conclusion": "success"
+  },
+  "source_id": "mhlw_kaigo_service_offices",
+  "service_code": "110",
+  "service_name": "訪問介護",
+  "probe_scope": "schema, identifiers, nulls, snapshot counts, hashes, and listing-change summaries; no capacity or quality inference",
+  "snapshots": [
+    {
+      "as_of": "2025-12-31",
+      "rows": 35191,
+      "unique_office_ids": 35191,
+      "municipalities": 1777,
+      "sha256": "7194d965e290d919acf270ce8ed8e8844738276ea7fcaa4456d75fcc17138b19",
+      "required_null_counts": {},
+      "selected_columns": {
+        "office_id": "事業所番号",
+        "municipality_code": "都道府県コード又は市町村コード",
+        "city": "市区町村名",
+        "service": "サービスの種類"
+      },
+      "duplicate_office_id_values": 0
+    },
+    {
+      "as_of": "2026-06-30",
+      "rows": 35166,
+      "unique_office_ids": 35166,
+      "municipalities": 1776,
+      "sha256": "4fa54cb485f6303c6b3f3cf2f38d37736997d3b4a4da9943b97d59fd8c5171bb",
+      "required_null_counts": {},
+      "selected_columns": {
+        "office_id": "事業所番号",
+        "municipality_code": "都道府県コード又は市町村コード",
+        "city": "市区町村名",
+        "service": "サービスの種類"
+      },
+      "duplicate_office_id_values": 0
+    }
+  ],
+  "comparison": {
+    "before_as_of": "2025-12-31",
+    "after_as_of": "2026-06-30",
+    "row_count_change": -25,
+    "unique_office_id_change": -25,
+    "listed_added_candidate_count": 1276,
+    "listed_removed_candidate_count": 1301,
+    "municipalities_with_nonzero_net_change": 678,
+    "largest_absolute_municipality_changes": [
+      {
+        "municipality_code": "282014",
+        "municipality_name": "姫路市",
+        "before_count": 130,
+        "after_count": 145,
+        "net_change": 15
+      },
+      {
+        "municipality_code": "282022",
+        "municipality_name": "尼崎市",
+        "before_count": 229,
+        "after_count": 242,
+        "net_change": 13
+      },
+      {
+        "municipality_code": "072044",
+        "municipality_name": "いわき市",
+        "before_count": 122,
+        "after_count": 110,
+        "net_change": -12
+      },
+      {
+        "municipality_code": "172014",
+        "municipality_name": "金沢市",
+        "before_count": 126,
+        "after_count": 138,
+        "net_change": 12
+      },
+      {
+        "municipality_code": "112038",
+        "municipality_name": "川口市",
+        "before_count": 123,
+        "after_count": 112,
+        "net_change": -11
+      },
+      {
+        "municipality_code": "282049",
+        "municipality_name": "西宮市",
+        "before_count": 155,
+        "after_count": 166,
+        "net_change": 11
+      },
+      {
+        "municipality_code": "272051",
+        "municipality_name": "吹田市",
+        "before_count": 129,
+        "after_count": 139,
+        "net_change": 10
+      },
+      {
+        "municipality_code": "011029",
+        "municipality_name": "札幌市北区",
+        "before_count": 78,
+        "after_count": 69,
+        "net_change": -9
+      },
+      {
+        "municipality_code": "271110",
+        "municipality_name": "大阪市浪速区",
+        "before_count": 67,
+        "after_count": 76,
+        "net_change": 9
+      },
+      {
+        "municipality_code": "281115",
+        "municipality_name": "神戸市西区",
+        "before_count": 50,
+        "after_count": 59,
+        "net_change": 9
+      },
+      {
+        "municipality_code": "012041",
+        "municipality_name": "旭川市",
+        "before_count": 197,
+        "after_count": 189,
+        "net_change": -8
+      },
+      {
+        "municipality_code": "022012",
+        "municipality_name": "青森市",
+        "before_count": 114,
+        "after_count": 106,
+        "net_change": -8
+      },
+      {
+        "municipality_code": "131113",
+        "municipality_name": "大田区",
+        "before_count": 133,
+        "after_count": 125,
+        "net_change": -8
+      },
+      {
+        "municipality_code": "132098",
+        "municipality_name": "町田市",
+        "before_count": 86,
+        "after_count": 94,
+        "net_change": 8
+      },
+      {
+        "municipality_code": "162019",
+        "municipality_name": "富山市",
+        "before_count": 140,
+        "after_count": 148,
+        "net_change": 8
+      },
+      {
+        "municipality_code": "281051",
+        "municipality_name": "神戸市兵庫区",
+        "before_count": 69,
+        "after_count": 77,
+        "net_change": 8
+      },
+      {
+        "municipality_code": "272035",
+        "municipality_name": "豊中市",
+        "before_count": 171,
+        "after_count": 178,
+        "net_change": 7
+      },
+      {
+        "municipality_code": "272221",
+        "municipality_name": "羽曳野市",
+        "before_count": 49,
+        "after_count": 42,
+        "net_change": -7
+      },
+      {
+        "municipality_code": "281069",
+        "municipality_name": "神戸市長田区",
+        "before_count": 62,
+        "after_count": 69,
+        "net_change": 7
+      },
+      {
+        "municipality_code": "302015",
+        "municipality_name": "和歌山市",
+        "before_count": 274,
+        "after_count": 281,
+        "net_change": 7
+      },
+      {
+        "municipality_code": "382019",
+        "municipality_name": "松山市",
+        "before_count": 200,
+        "after_count": 207,
+        "net_change": 7
+      },
+      {
+        "municipality_code": "422011",
+        "municipality_name": "長崎市",
+        "before_count": 140,
+        "after_count": 133,
+        "net_change": -7
+      },
+      {
+        "municipality_code": "011011",
+        "municipality_name": "札幌市中央区",
+        "before_count": 60,
+        "after_count": 54,
+        "net_change": -6
+      },
+      {
+        "municipality_code": "011053",
+        "municipality_name": "札幌市豊平区",
+        "before_count": 68,
+        "after_count": 62,
+        "net_change": -6
+      },
+      {
+        "municipality_code": "072010",
+        "municipality_name": "福島市",
+        "before_count": 83,
+        "after_count": 77,
+        "net_change": -6
+      },
+      {
+        "municipality_code": "072028",
+        "municipality_name": "会津若松市",
+        "before_count": 35,
+        "after_count": 29,
+        "net_change": -6
+      },
+      {
+        "municipality_code": "271411",
+        "municipality_name": "堺市堺区",
+        "before_count": 111,
+        "after_count": 105,
+        "net_change": -6
+      },
+      {
+        "municipality_code": "272191",
+        "municipality_name": "和泉市",
+        "before_count": 89,
+        "after_count": 83,
+        "net_change": -6
+      },
+      {
+        "municipality_code": "281093",
+        "municipality_name": "神戸市北区",
+        "before_count": 51,
+        "after_count": 57,
+        "net_change": 6
+      },
+      {
+        "municipality_code": "401374",
+        "municipality_name": "福岡市早良区",
+        "before_count": 87,
+        "after_count": 81,
+        "net_change": -6
+      }
+    ],
+    "semantic_boundary": [
+      "listed_added_candidate_count is not automatically a count of new openings",
+      "listed_removed_candidate_count is not automatically a count of closures",
+      "office listing counts do not measure capacity, staffing, utilization, or quality"
+    ]
+  },
+  "interpretation": {
+    "observed": "全国の掲載事業所数は2025-12-31の35,191件から2026-06-30の35,166件へ25件減った。一方、事業所番号ベースの掲載開始候補は1,276件、掲載終了候補は1,301件で、自治体別の純増減が0でない地域は678あった。",
+    "limits": [
+      "掲載開始候補を新規開設と同一視しない",
+      "掲載終了候補を廃業・休止と同一視しない",
+      "事業所数を定員、職員数、稼働量、利用可能量、品質の代理として単独利用しない",
+      "自治体別純増減は追加分析の候補抽出に使い、地域の介護供給の充足・不足を単独では判定しない"
+    ]
+  },
+  "data_handling": {
+    "raw_csv_committed": false,
+    "row_level_office_ids_committed": false,
+    "repository_contains_summary_only": true
+  }
+}

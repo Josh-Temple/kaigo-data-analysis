@@ -1,0 +1,36 @@
+name: Qualify insurer municipality crosswalk
+
+on:
+  pull_request:
+    paths:
+      - "config/jlis_local_government_codes.json"
+      - "config/qualified_insurer_memberships.json"
+      - "scripts/qualify_insurer_municipality_crosswalk.py"
+      - ".github/workflows/qualify-insurer-municipality-crosswalk.yml"
+      - "config/mhlw_ltc_status_monthly.json"
+      - "scripts/probe_mhlw_ltc_status.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build conservative exact-match crosswalk
+        run: |
+          python scripts/qualify_insurer_municipality_crosswalk.py \
+            --jlis-config config/jlis_local_government_codes.json \
+            --ltc-config config/mhlw_ltc_status_monthly.json \
+            --membership-config config/qualified_insurer_memberships.json \
+            --output /tmp/insurer-municipality-crosswalk-probe.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: insurer-municipality-crosswalk-probe
+          path: /tmp/insurer-municipality-crosswalk-probe.json
+          retention-days: 14

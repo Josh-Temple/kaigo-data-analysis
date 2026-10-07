@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="日本の介護について、公開データから地域差・需給・事業所の変化を分析するプロジェクト。">
+  <title>介護データ分析</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./">介護データ分析</a>
+    <nav aria-label="主要リンク">
+      <a href="./visit-care.html">訪問介護 pilot</a>
+      <a href="https://github.com/Josh-Temple/kaigo-data-analysis">GitHub</a>
+      <a href="https://kaigo-rules.vercel.app/databases">介護ルール</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">KAIGO DATA ANALYSIS / v0.1</p>
+      <h1>地域の介護を、<br>公開データから読む。</h1>
+      <p class="lead">人口、要介護認定、介護サービス事業所、将来人口。別々に公開されている情報を、出典と限界を残したまま結びます。</p>
+      <p class="status">現在はデータ源と分析方法を固定している段階です。実データの公開は、取得・スキーマ・地理結合の検証後に開始します。</p>
+    </section>
+
+    <section class="questions" aria-labelledby="questions-title">
+      <div class="section-number">01</div>
+      <div>
+        <h2 id="questions-title">調べたいこと</h2>
+        <ol class="analysis-list">
+          <li>
+            <span class="index">A</span>
+            <div><h3>介護サービスの地域差</h3><p>高齢者人口や認定者数に対して、各サービスの事業所掲載数は地域ごとにどう違うか。</p></div>
+          </li>
+          <li>
+            <span class="index">B</span>
+            <div><h3>事業所掲載状況の変化</h3><p>半年ごとの公式スナップショットを比較し、サービス供給の変化を観察する。</p></div>
+          </li>
+          <li>
+            <span class="index">C</span>
+            <div><h3>将来人口との関係</h3><p>人口構成が変わる地域で、現在のサービス配置がどのように見えるかを確認する。</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sources" aria-labelledby="sources-title">
+      <div class="section-number">02</div>
+      <div>
+        <h2 id="sources-title">初期データ源</h2>
+        <div class="source-row"><span>厚生労働省</span><strong>介護サービス情報公表システム</strong><em>事業所 / 半年</em></div>
+        <div class="source-row"><span>厚生労働省</span><strong>介護保険事業状況報告</strong><em>保険者 / 月・年</em></div>
+        <div class="source-row"><span>国土交通省</span><strong>250mメッシュ別将来推計人口</strong><em>250m / 〜2070</em></div>
+        <div class="source-row muted"><span>国土交通省</span><strong>全国の人流データ</strong><em>補助情報 / 2019–2021</em></div>
+        <p class="note">人流は現在の高齢者の移動や介護需要の代理には使いません。</p>
+      </div>
+    </section>
+
+    <section class="observed" aria-labelledby="observed-title">
+      <div class="section-number">03</div>
+      <div>
+        <p class="eyebrow">FIRST VERIFIED OBSERVATION</p>
+        <h2 id="observed-title">全国の件数はほぼ横ばいでも、<br>中では入れ替わっている。</h2>
+        <dl class="metrics">
+          <div><dt>2025-12-31</dt><dd>35,191</dd><span>訪問介護・掲載事業所</span></div>
+          <div><dt>2026-06-30</dt><dd>35,166</dd><span>訪問介護・掲載事業所</span></div>
+          <div><dt>掲載開始候補</dt><dd>1,276</dd><span>事業所番号ベース</span></div>
+          <div><dt>掲載終了候補</dt><dd>1,301</dd><span>事業所番号ベース</span></div>
+        </dl>
+        <p class="note strong-note">純差分は −25 件ですが、2時点の間に掲載状態が変わった事業所番号はそれより大きく動いています。ただし「掲載開始＝開設」「掲載終了＝廃業」とは扱いません。</p>
+        <p class="inline-link"><a href="./visit-care.html">人口で正規化した訪問介護pilotを見る →</a></p>
+      </div>
+    </section>
+
+    <section class="principles" aria-labelledby="principles-title">
+      <div class="section-number">04</div>
+      <div>
+        <h2 id="principles-title">数値を断定に変えない</h2>
+        <p class="large-copy">事業所数が少ない。それだけで「介護が不足している」とは言いません。</p>
+        <p>定員、職員数、稼働量、提供地域、利用者構成は事業所ごとに異なります。公開画面では、観察できた事実、そこから考えられること、データだけでは分からないことを分けて示します。</p>
+      </div>
+    </section>
+
+    <section class="next" aria-labelledby="next-title">
+      <div class="section-number">05</div>
+      <div>
+        <h2 id="next-title">次に実装するもの</h2>
+        <p>事業所数そのものの可視化ではなく、保険者別の認定者数・第1号被保険者数と将来人口を接続します。人口や認定者を分母にして、地域の供給状況を比較できるところまで進めます。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Source registry verified: 2026-10-07</p>
+    <p>個人プロジェクト。行政機関・事業者の公式判断を代替しません。</p>
+  </footer>
+</body>
+</html>
