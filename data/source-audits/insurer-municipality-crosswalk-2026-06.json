@@ -1,12 +1,12 @@
 {
-  "schema_version": "0.2",
+  "schema_version": "0.3",
   "audit_type": "insurer_municipality_crosswalk_qualification",
   "demand_period": "2026-06",
   "qualified_at": "2026-10-07",
   "evidence": {
-    "github_action_run_id": 37640385703,
-    "github_action_run_url": "https://github.com/Josh-Temple/kaigo-data-analysis/actions/runs/37640385703",
-    "tested_commit": "71f561ce5f0785b0ab1fa2a76e921d12d9269f2e",
+    "github_action_run_id": 37641421322,
+    "github_action_run_url": "https://github.com/Josh-Temple/kaigo-data-analysis/actions/runs/37641421322",
+    "tested_commit": "1379f581777db392e6e352387183446924df0329",
     "conclusion": "success"
   },
   "sources": {
@@ -17,17 +17,17 @@
   "results": {
     "jlis_local_government_records": 1912,
     "mhlw_insurers": 1574,
-    "matched_insurers": 1541,
-    "blocked_insurers": 33,
-    "coverage_percent": 97.90343074968234,
+    "matched_insurers": 1552,
+    "blocked_insurers": 22,
+    "coverage_percent": 98.6022871664549,
     "blocked_reason_counts": {
-      "wide_area_union": 20,
+      "wide_area_union": 14,
       "no_exact_current_local_government_match": 5,
-      "administrative_union_or_association": 8
+      "administrative_union_or_association": 3
     },
     "match_method_counts": {
       "exact_prefecture_and_name": 1531,
-      "qualified_insurer_membership": 10
+      "qualified_insurer_membership": 21
     }
   },
   "group_matches": [
@@ -238,6 +238,287 @@
       "match_method": "qualified_insurer_membership"
     },
     {
+      "prefecture": "埼玉県",
+      "insurer_name": "大里広域市町村圏組合",
+      "category1_insured_total": 111917,
+      "age75plus": 64066,
+      "local_government_code": null,
+      "local_government_codes": [
+        "112020",
+        "112186",
+        "114081"
+      ],
+      "member_names": [
+        "熊谷市",
+        "深谷市",
+        "寄居町"
+      ],
+      "membership_source_urls": [
+        "https://www.osato-k.jp/kaigohoken/plan/"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "富山県",
+      "insurer_name": "中新川広域行政事務組合",
+      "category1_insured_total": 15942,
+      "age75plus": 9780,
+      "local_government_code": null,
+      "local_government_codes": [
+        "163210",
+        "163228",
+        "163236"
+      ],
+      "member_names": [
+        "舟橋村",
+        "上市町",
+        "立山町"
+      ],
+      "membership_source_urls": [
+        "https://www.pref.toyama.jp/1211/kurashi/kenkou/iryou/kj00003938.html"
+      ],
+      "membership_temporal_basis": "富山県第9期介護保険事業支援計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "富山県",
+      "insurer_name": "砺波地方介護保険組合",
+      "category1_insured_total": 42820,
+      "age75plus": 26349,
+      "local_government_code": null,
+      "local_government_codes": [
+        "162086",
+        "162094",
+        "162108"
+      ],
+      "member_names": [
+        "砺波市",
+        "小矢部市",
+        "南砺市"
+      ],
+      "membership_source_urls": [
+        "https://pci-area.tonami.toyama.jp/9pamphlet.pdf",
+        "https://www.pci-area.tonami.toyama.jp/kumiai/010/kumiai.html"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "富山県",
+      "insurer_name": "新川地域介護保険・ケーブルテレビ事業組合",
+      "category1_insured_total": 25811,
+      "age75plus": 15930,
+      "local_government_code": null,
+      "local_government_codes": [
+        "162078",
+        "163422",
+        "163431"
+      ],
+      "member_names": [
+        "黒部市",
+        "入善町",
+        "朝日町"
+      ],
+      "membership_source_urls": [
+        "https://www.pref.toyama.jp/1211/kurashi/kenkou/iryou/kj00003938.html"
+      ],
+      "membership_temporal_basis": "富山県第9期介護保険事業支援計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "長野県",
+      "insurer_name": "諏訪広域連合",
+      "category1_insured_total": 62647,
+      "age75plus": 39729,
+      "local_government_code": null,
+      "local_government_codes": [
+        "202045",
+        "202061",
+        "202142",
+        "203611",
+        "203629",
+        "203637"
+      ],
+      "member_names": [
+        "岡谷市",
+        "諏訪市",
+        "茅野市",
+        "下諏訪町",
+        "富士見町",
+        "原村"
+      ],
+      "membership_source_urls": [
+        "https://www.union.suwa.lg.jp/site/kaigo/jigyo-keikaku.html",
+        "https://www.union.suwa.lg.jp/uploaded/attachment/13884.pdf",
+        "https://www.union.suwa.lg.jp/site/kaigo/0001474.html"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026） + 2026-06-30公式サービスコード",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "愛知県",
+      "insurer_name": "知多北部広域連合",
+      "category1_insured_total": 82954,
+      "age75plus": 50493,
+      "local_government_code": null,
+      "local_government_codes": [
+        "232220",
+        "232238",
+        "232246",
+        "234427"
+      ],
+      "member_names": [
+        "東海市",
+        "大府市",
+        "知多市",
+        "東浦町"
+      ],
+      "membership_source_urls": [
+        "https://www.chitahokubu.or.jp/statistical-information/management-plan/dai9ki/",
+        "https://www.chitahokubu.or.jp/for-insured/about-care-insurance/"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026） + 公式介護保険制度ページ",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "愛知県",
+      "insurer_name": "東三河広域連合",
+      "category1_insured_total": 208381,
+      "age75plus": 123102,
+      "local_government_code": null,
+      "local_government_codes": [
+        "232017",
+        "232076",
+        "232149",
+        "232211",
+        "232319",
+        "235610",
+        "235628",
+        "235636"
+      ],
+      "member_names": [
+        "豊橋市",
+        "豊川市",
+        "蒲郡市",
+        "新城市",
+        "田原市",
+        "設楽町",
+        "東栄町",
+        "豊根村"
+      ],
+      "membership_source_urls": [
+        "https://www.east-mikawa.jp/1160.htm",
+        "https://www.east-mikawa.jp/secure/1175/kaigohoken202403.pdf"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "三重県",
+      "insurer_name": "鈴鹿亀山地区広域連合",
+      "category1_insured_total": 64537,
+      "age75plus": 38025,
+      "local_government_code": null,
+      "local_government_codes": [
+        "242071",
+        "242101"
+      ],
+      "member_names": [
+        "鈴鹿市",
+        "亀山市"
+      ],
+      "membership_source_urls": [
+        "https://www.suzukakameyama-kouiki.jp/insurance/kaigoplan.html",
+        "https://www.suzukakameyama-kouiki.jp/insurance/file_plan7/d9_keikaku_20240401.pdf?20240419000000="
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "福岡県",
+      "insurer_name": "福岡県介護保険広域連合",
+      "category1_insured_total": 216776,
+      "age75plus": 127373,
+      "local_government_code": null,
+      "local_government_codes": [
+        "403415",
+        "403423",
+        "403431",
+        "403440",
+        "403458",
+        "403482",
+        "403814",
+        "403822",
+        "403831",
+        "403849",
+        "402265",
+        "404012",
+        "404021",
+        "404471",
+        "404489",
+        "402257",
+        "405035",
+        "402079",
+        "405221",
+        "405442",
+        "402061",
+        "404217",
+        "406015",
+        "406023",
+        "406040",
+        "406058",
+        "406082",
+        "406104",
+        "406091",
+        "402141",
+        "406422",
+        "406465",
+        "406473"
+      ],
+      "member_names": [
+        "宇美町",
+        "篠栗町",
+        "志免町",
+        "須恵町",
+        "新宮町",
+        "久山町",
+        "芦屋町",
+        "水巻町",
+        "岡垣町",
+        "遠賀町",
+        "宮若市",
+        "小竹町",
+        "鞍手町",
+        "筑前町",
+        "東峰村",
+        "うきは市",
+        "大刀洗町",
+        "柳川市",
+        "大木町",
+        "広川町",
+        "田川市",
+        "桂川町",
+        "香春町",
+        "添田町",
+        "糸田町",
+        "川崎町",
+        "大任町",
+        "福智町",
+        "赤村",
+        "豊前市",
+        "吉富町",
+        "上毛町",
+        "築上町"
+      ],
+      "membership_source_urls": [
+        "https://www.fukuoka-kaigo.jp/about/committee/session/img/keikaku_9.pdf",
+        "https://www.fukuoka-kaigo.jp/about/committee/session/9session.html"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
       "prefecture": "佐賀県",
       "insurer_name": "鳥栖地区広域市町村圏組合",
       "category1_insured_total": 35012,
@@ -286,6 +567,104 @@
       ],
       "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）",
       "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "長崎県",
+      "insurer_name": "島原地域広域市町村圏組合",
+      "category1_insured_total": 47731,
+      "age75plus": 27079,
+      "local_government_code": null,
+      "local_government_codes": [
+        "422037",
+        "422134",
+        "422142"
+      ],
+      "member_names": [
+        "島原市",
+        "雲仙市",
+        "南島原市"
+      ],
+      "membership_source_urls": [
+        "https://www.shimabara-area.net/kaigo/kiji003673/index.html",
+        "https://www.shimabara-area.net/kaigo/kiji003682/3_682_shiryou1_5klm45ua.pdf"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）",
+      "match_method": "qualified_insurer_membership"
+    },
+    {
+      "prefecture": "沖縄県",
+      "insurer_name": "沖縄県介護保険広域連合",
+      "category1_insured_total": 110140,
+      "age75plus": 55159,
+      "local_government_code": null,
+      "local_government_codes": [
+        "473014",
+        "473022",
+        "473031",
+        "473065",
+        "473081",
+        "473111",
+        "473138",
+        "473146",
+        "473154",
+        "473596",
+        "473600",
+        "473243",
+        "473251",
+        "473260",
+        "473278",
+        "473286",
+        "473294",
+        "472123",
+        "473626",
+        "472158",
+        "473481",
+        "473618",
+        "473502",
+        "473537",
+        "473545",
+        "473553",
+        "473561",
+        "473570",
+        "473588"
+      ],
+      "member_names": [
+        "国頭村",
+        "大宜味村",
+        "東村",
+        "今帰仁村",
+        "本部町",
+        "恩納村",
+        "宜野座村",
+        "金武町",
+        "伊江村",
+        "伊平屋村",
+        "伊是名村",
+        "読谷村",
+        "嘉手納町",
+        "北谷町",
+        "北中城村",
+        "中城村",
+        "西原町",
+        "豊見城市",
+        "八重瀬町",
+        "南城市",
+        "与那原町",
+        "久米島町",
+        "南風原町",
+        "渡嘉敷村",
+        "座間味村",
+        "粟国村",
+        "渡名喜村",
+        "南大東村",
+        "北大東村"
+      ],
+      "membership_source_urls": [
+        "https://www.okinawa-kouiki.jp/_files/00171083/09keikaku.pdf",
+        "https://www.okinawa-kouiki.jp/docs/2012110500026/file_contents/gaido.pdf"
+      ],
+      "membership_temporal_basis": "第9期介護保険事業計画（2024-2026）・第9期版公式ガイド",
+      "match_method": "qualified_insurer_membership"
     }
   ],
   "match_rules": [
@@ -319,44 +698,12 @@
       "block_reason": "no_exact_current_local_government_match"
     },
     {
-      "prefecture": "埼玉県",
-      "insurer_name": "大里広域市町村圏組合",
-      "category1_insured_total": 111917,
-      "age75plus": 64066,
-      "candidate_count": 0,
-      "block_reason": "administrative_union_or_association"
-    },
-    {
       "prefecture": "千葉県",
       "insurer_name": "鎌ヶ谷市",
       "category1_insured_total": 31191,
       "age75plus": 19661,
       "candidate_count": 0,
       "block_reason": "no_exact_current_local_government_match"
-    },
-    {
-      "prefecture": "富山県",
-      "insurer_name": "中新川広域行政事務組合",
-      "category1_insured_total": 15942,
-      "age75plus": 9780,
-      "candidate_count": 0,
-      "block_reason": "administrative_union_or_association"
-    },
-    {
-      "prefecture": "富山県",
-      "insurer_name": "砺波地方介護保険組合",
-      "category1_insured_total": 42820,
-      "age75plus": 26349,
-      "candidate_count": 0,
-      "block_reason": "administrative_union_or_association"
-    },
-    {
-      "prefecture": "富山県",
-      "insurer_name": "新川地域介護保険・ケーブルテレビ事業組合",
-      "category1_insured_total": 25811,
-      "age75plus": 15930,
-      "candidate_count": 0,
-      "block_reason": "administrative_union_or_association"
     },
     {
       "prefecture": "福井県",
@@ -379,14 +726,6 @@
       "insurer_name": "木曽広域連合",
       "category1_insured_total": 10286,
       "age75plus": 6461,
-      "candidate_count": 0,
-      "block_reason": "wide_area_union"
-    },
-    {
-      "prefecture": "長野県",
-      "insurer_name": "諏訪広域連合",
-      "category1_insured_total": 62647,
-      "age75plus": 39729,
       "candidate_count": 0,
       "block_reason": "wide_area_union"
     },
@@ -423,22 +762,6 @@
       "block_reason": "wide_area_union"
     },
     {
-      "prefecture": "愛知県",
-      "insurer_name": "知多北部広域連合",
-      "category1_insured_total": 82954,
-      "age75plus": 50493,
-      "candidate_count": 0,
-      "block_reason": "wide_area_union"
-    },
-    {
-      "prefecture": "愛知県",
-      "insurer_name": "東三河広域連合",
-      "category1_insured_total": 208381,
-      "age75plus": 123102,
-      "candidate_count": 0,
-      "block_reason": "wide_area_union"
-    },
-    {
       "prefecture": "三重県",
       "insurer_name": "紀北広域連合",
       "category1_insured_total": 12990,
@@ -451,14 +774,6 @@
       "insurer_name": "紀南介護保険広域連合",
       "category1_insured_total": 13570,
       "age75plus": 8374,
-      "candidate_count": 0,
-      "block_reason": "wide_area_union"
-    },
-    {
-      "prefecture": "三重県",
-      "insurer_name": "鈴鹿亀山地区広域連合",
-      "category1_insured_total": 64537,
-      "age75plus": 38025,
       "candidate_count": 0,
       "block_reason": "wide_area_union"
     },
@@ -527,36 +842,12 @@
       "block_reason": "wide_area_union"
     },
     {
-      "prefecture": "福岡県",
-      "insurer_name": "福岡県介護保険広域連合",
-      "category1_insured_total": 216776,
-      "age75plus": 127373,
-      "candidate_count": 0,
-      "block_reason": "wide_area_union"
-    },
-    {
       "prefecture": "佐賀県",
       "insurer_name": "杵藤地区広域市町村圏組合",
       "category1_insured_total": 49785,
       "age75plus": 28062,
       "candidate_count": 0,
       "block_reason": "administrative_union_or_association"
-    },
-    {
-      "prefecture": "長崎県",
-      "insurer_name": "島原地域広域市町村圏組合",
-      "category1_insured_total": 47731,
-      "age75plus": 27079,
-      "candidate_count": 0,
-      "block_reason": "administrative_union_or_association"
-    },
-    {
-      "prefecture": "沖縄県",
-      "insurer_name": "沖縄県介護保険広域連合",
-      "category1_insured_total": 110140,
-      "age75plus": 55159,
-      "candidate_count": 0,
-      "block_reason": "wide_area_union"
     }
   ],
   "boundaries": [
