@@ -1,23 +1,23 @@
 {
-  "schema_version": "0.2",
+  "schema_version": "0.3",
   "status": "pilot_observation_only",
-  "generated_from_action_run": 37640385724,
+  "generated_from_action_run": 37641421076,
   "service": "訪問介護",
   "office_snapshot": "2026-06-30",
   "demand_period": "2026-06",
-  "matched_insurer_count": 1541,
-  "blocked_insurer_count": 33,
+  "matched_insurer_count": 1552,
+  "blocked_insurer_count": 22,
   "population_coverage": {
-    "category1_insured_percent": 96.28172052032559,
-    "age75plus_percent": 96.31957696573986,
-    "category1_certified_percent": 96.60266693368467
+    "category1_insured_percent": 99.04035543568203,
+    "age75plus_percent": 99.02829190407849,
+    "category1_certified_percent": 99.09860851161014
   },
   "metric_distribution": {
     "unit": "listed home-visit-care offices per 10,000 age-75-plus category-1 insured persons",
-    "n": 1541,
-    "p25": 8.186655751125665,
-    "median": 11.94600406164138,
-    "p75": 17.024174327545115
+    "n": 1552,
+    "p25": 8.196725438396422,
+    "median": 11.951001963149352,
+    "p75": 17.034835053426164
   },
   "yokohama": {
     "prefecture": "神奈川県",
@@ -255,10 +255,10 @@
       "url": "https://www.j-lis.go.jp/spd/code-address/jititai-code.html"
     }
   ],
-  "qualified_group_insurer_count": 10,
+  "qualified_group_insurer_count": 21,
   "geography_mode_counts": {
     "designated_city_plus_wards": 20,
     "direct_local_government": 1511,
-    "qualified_insurer_membership_aggregate": 10
+    "qualified_insurer_membership_aggregate": 21
   }
 }
