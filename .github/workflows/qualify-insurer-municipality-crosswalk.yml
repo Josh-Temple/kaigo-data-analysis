@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "config/jlis_local_government_codes.json"
+      - "config/qualified_insurer_memberships.json"
       - "scripts/qualify_insurer_municipality_crosswalk.py"
       - ".github/workflows/qualify-insurer-municipality-crosswalk.yml"
       - "config/mhlw_ltc_status_monthly.json"
@@ -26,6 +27,7 @@ jobs:
           python scripts/qualify_insurer_municipality_crosswalk.py \
             --jlis-config config/jlis_local_government_codes.json \
             --ltc-config config/mhlw_ltc_status_monthly.json \
+            --membership-config config/qualified_insurer_memberships.json \
             --output /tmp/insurer-municipality-crosswalk-probe.json
       - uses: actions/upload-artifact@v4
         with:
