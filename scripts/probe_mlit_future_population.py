@@ -10,10 +10,13 @@ from __future__ import annotations
 
 import argparse
 from html.parser import HTMLParser
+import csv
 import hashlib
+import io
 import json
 from pathlib import Path
 import re
+import zipfile
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
@@ -27,6 +30,20 @@ def fetch(url: str) -> bytes:
         },
     )
     with urlopen(request, timeout=120) as response:
+        if response.status != 200:
+            raise RuntimeError(f"HTTP {response.status} for {url}")
+        return response.read()
+
+
+def fetch_binary(url: str) -> bytes:
+    request = Request(
+        url,
+        headers={
+            "User-Agent": "kaigo-data-analysis/0.1 (+https://github.com/Josh-Temple/kaigo-data-analysis)",
+            "Accept": "application/zip,application/octet-stream,*/*",
+        },
+    )
+    with urlopen(request, timeout=300) as response:
         if response.status != 200:
             raise RuntimeError(f"HTTP {response.status} for {url}")
         return response.read()
@@ -119,6 +136,53 @@ def main() -> None:
             seen.add(key)
             deduped.append(item)
 
+    zip_inspection = None
+    if len(deduped) == 1:
+        download_url = deduped[0]["resolved"]
+        zip_raw = fetch_binary(download_url)
+        if not zip_raw.startswith(b"PK"):
+            raise ValueError("discovered download is not a ZIP container")
+
+        with zipfile.ZipFile(io.BytesIO(zip_raw)) as zf:
+            entries = [
+                {
+                    "name": info.filename,
+                    "file_size": info.file_size,
+                    "compress_size": info.compress_size,
+                }
+                for info in zf.infolist()
+                if not info.is_dir()
+            ]
+            csv_entries = [
+                info.filename for info in zf.infolist()
+                if not info.is_dir() and info.filename.lower().endswith(".csv")
+            ]
+            csv_samples = []
+            for name in csv_entries[:5]:
+                with zf.open(name) as handle:
+                    wrapper = io.TextIOWrapper(handle, encoding="cp932", newline="")
+                    reader = csv.reader(wrapper)
+                    rows = []
+                    for _ in range(6):
+                        try:
+                            rows.append(next(reader))
+                        except StopIteration:
+                            break
+                    csv_samples.append({
+                        "name": name,
+                        "sample_rows": rows,
+                    })
+
+        zip_inspection = {
+            "download_url": download_url,
+            "bytes": len(zip_raw),
+            "sha256": hashlib.sha256(zip_raw).hexdigest(),
+            "entry_count": len(entries),
+            "entries": entries,
+            "csv_entry_count": len(csv_entries),
+            "csv_samples": csv_samples,
+        }
+
     result = {
         "schema_version": "0.1",
         "source_id": config["source_id"],
@@ -131,9 +195,10 @@ def main() -> None:
         "exact_html_elements": exact_elements,
         "candidate_download_urls": deduped,
         "html_contexts": contexts,
+        "zip_inspection": zip_inspection,
         "status": (
-            "download_candidate_discovered"
-            if deduped
+            "zip_schema_sampled"
+            if zip_inspection is not None
             else "filename_verified_download_url_not_yet_resolved"
         ),
         "boundary": "No storage URL is constructed from a guessed path.",
@@ -148,8 +213,8 @@ def main() -> None:
         "status": result["status"],
         "filename_occurrence_count": result["filename_occurrence_count"],
         "candidate_download_urls": result["candidate_download_urls"],
+        "zip_inspection": result["zip_inspection"],
         "exact_html_elements": result["exact_html_elements"],
-        "html_contexts": result["html_contexts"],
     }, ensure_ascii=False, indent=2))
 
 
