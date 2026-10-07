@@ -1,0 +1,381 @@
+{
+  "schema_version": "0.1",
+  "audit_type": "insurer_municipality_crosswalk_qualification",
+  "demand_period": "2026-06",
+  "qualified_at": "2026-10-07",
+  "evidence": {
+    "github_action_run_id": 37638631690,
+    "github_action_run_url": "https://github.com/Josh-Temple/kaigo-data-analysis/actions/runs/37638631690",
+    "tested_commit": "75cd6547406346c41e8131456b29e0893d0b67f1",
+    "conclusion": "success"
+  },
+  "sources": {
+    "mhlw": "介護保険事業状況報告 2026-06 保険者別第1表",
+    "jlis": "地方公共団体コード住所 都道府県別ページ"
+  },
+  "results": {
+    "jlis_local_government_records": 1912,
+    "mhlw_insurers": 1574,
+    "matched_insurers": 1531,
+    "blocked_insurers": 43,
+    "coverage_percent": 97.26810673443455,
+    "blocked_reason_counts": {
+      "wide_area_union": 25,
+      "no_exact_current_local_government_match": 5,
+      "administrative_union_or_association": 13
+    }
+  },
+  "match_rule": "都道府県 + 保険者名がJ-LISの1団体に完全一致した場合のみ採用",
+  "blocked": [
+    {
+      "prefecture": "北海道",
+      "insurer_name": "日高中部広域連合",
+      "category1_insured_total": 8843,
+      "age75plus": 5322,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "北海道",
+      "insurer_name": "空知中部広域連合",
+      "category1_insured_total": 8431,
+      "age75plus": 5327,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "北海道",
+      "insurer_name": "後志広域連合",
+      "category1_insured_total": 16845,
+      "age75plus": 10205,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "北海道",
+      "insurer_name": "大雪地区広域連合",
+      "category1_insured_total": 9068,
+      "age75plus": 5490,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "岩手県",
+      "insurer_name": "金ヶ崎町",
+      "category1_insured_total": 4714,
+      "age75plus": 2620,
+      "candidate_count": 0,
+      "block_reason": "no_exact_current_local_government_match"
+    },
+    {
+      "prefecture": "岩手県",
+      "insurer_name": "二戸地区広域行政事務組合",
+      "category1_insured_total": 19962,
+      "age75plus": 11527,
+      "candidate_count": 0,
+      "block_reason": "administrative_union_or_association"
+    },
+    {
+      "prefecture": "岩手県",
+      "insurer_name": "盛岡北部行政事務組合",
+      "category1_insured_total": 17420,
+      "age75plus": 9967,
+      "candidate_count": 0,
+      "block_reason": "administrative_union_or_association"
+    },
+    {
+      "prefecture": "岩手県",
+      "insurer_name": "久慈広域連合",
+      "category1_insured_total": 20404,
+      "age75plus": 11551,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "岩手県",
+      "insurer_name": "一関地区広域行政組合",
+      "category1_insured_total": 43546,
+      "age75plus": 24936,
+      "candidate_count": 0,
+      "block_reason": "administrative_union_or_association"
+    },
+    {
+      "prefecture": "宮城県",
+      "insurer_name": "七ヶ宿町",
+      "category1_insured_total": 524,
+      "age75plus": 323,
+      "candidate_count": 0,
+      "block_reason": "no_exact_current_local_government_match"
+    },
+    {
+      "prefecture": "秋田県",
+      "insurer_name": "大曲仙北広域市町村圏組合",
+      "category1_insured_total": 46814,
+      "age75plus": 26984,
+      "candidate_count": 0,
+      "block_reason": "administrative_union_or_association"
+    },
+    {
+      "prefecture": "埼玉県",
+      "insurer_name": "大里広域市町村圏組合",
+      "category1_insured_total": 111917,
+      "age75plus": 64066,
+      "candidate_count": 0,
+      "block_reason": "administrative_union_or_association"
+    },
+    {
+      "prefecture": "千葉県",
+      "insurer_name": "鎌ヶ谷市",
+      "category1_insured_total": 31191,
+      "age75plus": 19661,
+      "candidate_count": 0,
+      "block_reason": "no_exact_current_local_government_match"
+    },
+    {
+      "prefecture": "富山県",
+      "insurer_name": "中新川広域行政事務組合",
+      "category1_insured_total": 15942,
+      "age75plus": 9780,
+      "candidate_count": 0,
+      "block_reason": "administrative_union_or_association"
+    },
+    {
+      "prefecture": "富山県",
+      "insurer_name": "砺波地方介護保険組合",
+      "category1_insured_total": 42820,
+      "age75plus": 26349,
+      "candidate_count": 0,
+      "block_reason": "administrative_union_or_association"
+    },
+    {
+      "prefecture": "富山県",
+      "insurer_name": "新川地域介護保険・ケーブルテレビ事業組合",
+      "category1_insured_total": 25811,
+      "age75plus": 15930,
+      "candidate_count": 0,
+      "block_reason": "administrative_union_or_association"
+    },
+    {
+      "prefecture": "福井県",
+      "insurer_name": "坂井地区広域連合",
+      "category1_insured_total": 35346,
+      "age75plus": 20442,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "長野県",
+      "insurer_name": "北アルプス広域連合",
+      "category1_insured_total": 20468,
+      "age75plus": 12948,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "長野県",
+      "insurer_name": "木曽広域連合",
+      "category1_insured_total": 10286,
+      "age75plus": 6461,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "長野県",
+      "insurer_name": "諏訪広域連合",
+      "category1_insured_total": 62647,
+      "age75plus": 39729,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "岐阜県",
+      "insurer_name": "関ヶ原町",
+      "category1_insured_total": 2643,
+      "age75plus": 1648,
+      "candidate_count": 0,
+      "block_reason": "no_exact_current_local_government_match"
+    },
+    {
+      "prefecture": "岐阜県",
+      "insurer_name": "安八郡広域連合",
+      "category1_insured_total": 12913,
+      "age75plus": 7782,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "岐阜県",
+      "insurer_name": "揖斐広域連合",
+      "category1_insured_total": 21071,
+      "age75plus": 12569,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "岐阜県",
+      "insurer_name": "もとす広域連合",
+      "category1_insured_total": 27536,
+      "age75plus": 16086,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "愛知県",
+      "insurer_name": "知多北部広域連合",
+      "category1_insured_total": 82954,
+      "age75plus": 50493,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "愛知県",
+      "insurer_name": "東三河広域連合",
+      "category1_insured_total": 208381,
+      "age75plus": 123102,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "三重県",
+      "insurer_name": "紀北広域連合",
+      "category1_insured_total": 12990,
+      "age75plus": 8350,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "三重県",
+      "insurer_name": "紀南介護保険広域連合",
+      "category1_insured_total": 13570,
+      "age75plus": 8374,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "三重県",
+      "insurer_name": "鈴鹿亀山地区広域連合",
+      "category1_insured_total": 64537,
+      "age75plus": 38025,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "鳥取県",
+      "insurer_name": "南部箕蚊屋広域連合",
+      "category1_insured_total": 9094,
+      "age75plus": 5364,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "島根県",
+      "insurer_name": "邑智郡総合事務組合",
+      "category1_insured_total": 7336,
+      "age75plus": 4758,
+      "candidate_count": 0,
+      "block_reason": "administrative_union_or_association"
+    },
+    {
+      "prefecture": "島根県",
+      "insurer_name": "浜田地区広域行政組合",
+      "category1_insured_total": 26927,
+      "age75plus": 16446,
+      "candidate_count": 0,
+      "block_reason": "administrative_union_or_association"
+    },
+    {
+      "prefecture": "島根県",
+      "insurer_name": "雲南広域連合",
+      "category1_insured_total": 20932,
+      "age75plus": 12936,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "島根県",
+      "insurer_name": "隠岐広域連合",
+      "category1_insured_total": 7580,
+      "age75plus": 4627,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "徳島県",
+      "insurer_name": "みよし広域連合",
+      "category1_insured_total": 15345,
+      "age75plus": 8748,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "高知県",
+      "insurer_name": "檮原町",
+      "category1_insured_total": 1408,
+      "age75plus": 888,
+      "candidate_count": 0,
+      "block_reason": "no_exact_current_local_government_match"
+    },
+    {
+      "prefecture": "高知県",
+      "insurer_name": "中芸広域連合",
+      "category1_insured_total": 4181,
+      "age75plus": 2600,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "福岡県",
+      "insurer_name": "福岡県介護保険広域連合",
+      "category1_insured_total": 216776,
+      "age75plus": 127373,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "佐賀県",
+      "insurer_name": "杵藤地区広域市町村圏組合",
+      "category1_insured_total": 49785,
+      "age75plus": 28062,
+      "candidate_count": 0,
+      "block_reason": "administrative_union_or_association"
+    },
+    {
+      "prefecture": "佐賀県",
+      "insurer_name": "鳥栖地区広域市町村圏組合",
+      "category1_insured_total": 35012,
+      "age75plus": 19976,
+      "candidate_count": 0,
+      "block_reason": "administrative_union_or_association"
+    },
+    {
+      "prefecture": "佐賀県",
+      "insurer_name": "佐賀中部広域連合",
+      "category1_insured_total": 101129,
+      "age75plus": 56951,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    },
+    {
+      "prefecture": "長崎県",
+      "insurer_name": "島原地域広域市町村圏組合",
+      "category1_insured_total": 47731,
+      "age75plus": 27079,
+      "candidate_count": 0,
+      "block_reason": "administrative_union_or_association"
+    },
+    {
+      "prefecture": "沖縄県",
+      "insurer_name": "沖縄県介護保険広域連合",
+      "category1_insured_total": 110140,
+      "age75plus": 55159,
+      "candidate_count": 0,
+      "block_reason": "wide_area_union"
+    }
+  ],
+  "boundaries": [
+    "広域連合・行政組合等の構成市町村は推測しない",
+    "表記差だけで同一団体とみなさない",
+    "名称の部分一致・類似度・手動補完を使わない",
+    "J-LISの現行情報と2026-06-30時点が完全に同一であることの時点検証は別途必要"
+  ]
+}
