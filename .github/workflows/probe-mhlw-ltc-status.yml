@@ -1,0 +1,37 @@
+name: Probe MHLW LTC status sources
+
+on:
+  pull_request:
+    paths:
+      - "config/mhlw_ltc_status_monthly.json"
+      - "scripts/probe_mhlw_ltc_status.py"
+      - ".github/workflows/probe-mhlw-ltc-status.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Probe official insurer-level monthly tables
+        run: |
+          python scripts/probe_mhlw_ltc_status.py \
+            --config config/mhlw_ltc_status_monthly.json \
+            --output /tmp/mhlw-ltc-status-source-probe.json
+
+      - name: Upload source-probe evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: mhlw-ltc-status-source-probe
+          path: /tmp/mhlw-ltc-status-source-probe.json
+          retention-days: 14
