@@ -1,0 +1,37 @@
+name: Probe MHLW visit-care snapshots
+
+on:
+  pull_request:
+    paths:
+      - "config/mhlw_visit_care_snapshots.json"
+      - "scripts/probe_mhlw_visit_care.py"
+      - ".github/workflows/probe-mhlw-visit-care.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Probe official snapshots
+        run: |
+          python scripts/probe_mhlw_visit_care.py \
+            --manifest config/mhlw_visit_care_snapshots.json \
+            --output /tmp/mhlw-visit-care-source-probe.json
+
+      - name: Upload source-probe evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: mhlw-visit-care-source-probe
+          path: /tmp/mhlw-visit-care-source-probe.json
+          retention-days: 14
