@@ -1,0 +1,48 @@
+{
+  "schema_version": "0.1",
+  "metrics": [
+    {
+      "id": "office_count",
+      "label": "サービス別事業所掲載数",
+      "formula": "count(distinct office_id) by geography, service, snapshot",
+      "unit": "事業所",
+      "required_source_ids": ["mhlw_kaigo_service_offices"],
+      "interpretation_limit": "掲載数であり、定員・職員数・稼働量を表さない"
+    },
+    {
+      "id": "office_count_per_10k_age75plus",
+      "label": "75歳以上人口1万人当たり事業所掲載数",
+      "formula": "office_count / population_age75plus * 10000",
+      "unit": "事業所 / 75歳以上人口1万人",
+      "required_source_ids": [
+        "mhlw_kaigo_service_offices",
+        "mlit_future_population_250m_2024"
+      ],
+      "interpretation_limit": "供給能力の粗い代理であり、不足・過剰を単独で判定しない"
+    },
+    {
+      "id": "certification_rate",
+      "label": "要介護・要支援認定率",
+      "formula": "certified_persons / category1_insured_persons",
+      "unit": "%",
+      "required_source_ids": ["mhlw_long_term_care_insurance_status"],
+      "interpretation_limit": "人口構成、制度運用、地域特性等の影響を含み、単独でサービス需要を表さない"
+    },
+    {
+      "id": "office_listing_net_change",
+      "label": "事業所掲載数のスナップショット間増減",
+      "formula": "office_count_t - office_count_t_minus_1",
+      "unit": "事業所",
+      "required_source_ids": ["mhlw_kaigo_service_offices"],
+      "interpretation_limit": "増減を開設・廃業件数と同一視しない"
+    },
+    {
+      "id": "future_population_age75plus_change",
+      "label": "75歳以上人口の将来変化",
+      "formula": "population_age75plus_future - population_age75plus_baseline",
+      "unit": "人",
+      "required_source_ids": ["mlit_future_population_250m_2024"],
+      "interpretation_limit": "人口推計であり、介護利用者数の予測ではない"
+    }
+  ]
+}
